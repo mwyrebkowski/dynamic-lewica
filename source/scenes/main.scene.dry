@@ -3,7 +3,7 @@ is-hand: true
 max-cards: 3
 on-arrival: {! 
 Q.handDescription = "Draw from Party Affairs or Advisor Actions.";
-Q.pinnedCardsDescription = "";
+Q.pinnedCardsDescription = "Advisor panel - switch leadership or inspect the active advisor team.";
 !}
 
 = [+ month : month +] [+ year +]
@@ -14,13 +14,14 @@ Actions this month: [+ month_actions +] / [+ actions_per_month +]
 
 - @party
 - @advisors
+- @lewica_switch_leadership_pinned
 
 @main_easy
 is-hand: true
 max-cards: 4
 on-arrival: {! 
 Q.handDescription = "Draw from Party Affairs or Advisor Actions.";
-Q.pinnedCardsDescription = "";
+Q.pinnedCardsDescription = "Advisor panel - switch leadership or inspect the active advisor team.";
 !}
 
 = [+ month : month +] [+ year +]
@@ -31,6 +32,7 @@ Actions this month: [+ month_actions +] / [+ actions_per_month +]
 
 - @party
 - @advisors
+- @lewica_switch_leadership_pinned
 
 @party
 title: Party Affairs

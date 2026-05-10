@@ -20,6 +20,23 @@ Q.gawkowski_network_tension_display = Math.round(Q.gawkowski_network_tension || 
 Q.tr_residue_tension_display = Math.round(Q.tr_residue_tension || 0);
 Q.pps_up_tension_display = Math.round(Q.pps_up_tension || 0);
 Q.left_tension_display = Math.round(Q.left_tension || 0);
+const activeAdvisors = [];
+if (Q.miller_advisor) activeAdvisors.push("Leszek Miller");
+if (Q.gawkowski_advisor) activeAdvisors.push("Krzysztof Gawkowski");
+if (Q.senyszyn_advisor) activeAdvisors.push("Joanna Senyszyn");
+if (Q.czarzasty_advisor) activeAdvisors.push("Wlodzimierz Czarzasty");
+if (Q.trela_advisor) activeAdvisors.push("Tomasz Trela");
+if (Q.jonski_advisor) activeAdvisors.push("Dariusz Jonski");
+if (Q.biedron_advisor) activeAdvisors.push("Robert Biedron");
+if (Q.wanda_nowicka_advisor) activeAdvisors.push("Wanda Nowicka");
+if (Q.barbara_nowacka_advisor) activeAdvisors.push("Barbara Nowacka");
+if (Q.ikonowicz_advisor) activeAdvisors.push("Piotr Ikonowicz");
+if (Q.kwasniewski_advisor) activeAdvisors.push("Aleksander Kwasniewski");
+if (Q.belka_advisor) activeAdvisors.push("Marek Belka");
+if (Q.cimoszewicz_advisor) activeAdvisors.push("Wlodzimierz Cimoszewicz");
+Q.active_advisor_summary = activeAdvisors.length ? activeAdvisors.join(", ") : "none";
+Q.advisor_action_status = Q.advisor_action_timer > 0 ? Q.advisor_action_timer + " months" : "available";
+Q.advisor_roster_status = Q.advisor_roster_timer > 0 ? Q.advisor_roster_timer + " months" : "available";
 	!}
 
 = Status
@@ -47,6 +64,13 @@ SLD modernizers: strength [+ sld_modernizers_strength +], tension [+ sld_moderni
 Gawkowski secretariat network: strength [+ gawkowski_network_strength +], tension [+ gawkowski_network_tension_display +] / 100 [? if gawkowski_network_split: - split?]  
 TR residue: strength [+ tr_residue_strength +], tension [+ tr_residue_tension_display +] / 100 [? if tr_residue_split: - split?]  
 PPS/UP: strength [+ pps_up_strength +], tension [+ pps_up_tension_display +] / 100 [? if pps_up_split: - split?]
+
+== Advisors
+
+Active advisors: [+ active_advisor_summary +]  
+Advisor actions: [+ advisor_action_status +]  
+Switch leadership: [+ advisor_roster_status +]  
+Last roster change: [+ advisor_last_roster_change +]
 
 == Polling
 

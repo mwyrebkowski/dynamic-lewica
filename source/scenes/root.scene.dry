@@ -54,6 +54,7 @@ if (Q.difficulty > 0) {
 
 Q.advisor_action_timer = 0;
 Q.advisor_roster_timer = 0;
+Q.shuffle_leadership_timer = 999;
 Q.party_congress_timer = 0;
 Q.campaign_timer = 0;
 Q.fundraising_timer = 0;
@@ -169,6 +170,9 @@ Q.cimoszewicz_endorsement_used = 0;
 Q.emergency_fundraising_used = 0;
 Q.nowacka_unity_mandate = 0;
 Q.advisor_last_action = "";
+Q.advisor_last_roster_change = "Initial SLD leadership team";
+Q.advisor_roster_changes = 0;
+Q.advisor_roster_changed = 0;
 Q.government_party = "PO-PSL";
 Q.prime_minister = "Donald Tusk";
 Q.president = "Bronislaw Komorowski";

@@ -1,0 +1,9 @@
+title: Switch Leadership
+new-page: true
+is-card: true
+is-pinned-card: true
+card-image: img/portraits/placeholder.jpg
+view-if: started and advisor_roster_timer <= 0
+choose-if: month_actions < actions_per_month
+unavailable-subtitle: No monthly action remaining.
+go-to: lewica_advisor_roster.switch_leadership_start

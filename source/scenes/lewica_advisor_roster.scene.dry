@@ -1,421 +1,547 @@
-title: Advisor Roster
+title: Advisor Panel
+new-page: true
+is-special: true
+view-if: started
+on-arrival: {!
+function advisorNames() {
+    const names = [];
+    if (Q.miller_advisor) names.push("Leszek Miller");
+    if (Q.gawkowski_advisor) names.push("Krzysztof Gawkowski");
+    if (Q.senyszyn_advisor) names.push("Joanna Senyszyn");
+    if (Q.czarzasty_advisor) names.push("Wlodzimierz Czarzasty");
+    if (Q.trela_advisor) names.push("Tomasz Trela");
+    if (Q.jonski_advisor) names.push("Dariusz Jonski");
+    if (Q.biedron_advisor) names.push("Robert Biedron");
+    if (Q.wanda_nowicka_advisor) names.push("Wanda Nowicka");
+    if (Q.barbara_nowacka_advisor) names.push("Barbara Nowacka");
+    if (Q.ikonowicz_advisor) names.push("Piotr Ikonowicz");
+    if (Q.kwasniewski_advisor) names.push("Aleksander Kwasniewski");
+    if (Q.belka_advisor) names.push("Marek Belka");
+    if (Q.cimoszewicz_advisor) names.push("Wlodzimierz Cimoszewicz");
+    return names.length ? names.join(", ") : "none";
+}
+Q.active_advisor_summary = advisorNames();
+Q.advisor_action_status = Q.advisor_action_timer > 0 ? Q.advisor_action_timer + " months" : "available";
+Q.advisor_roster_status = Q.advisor_roster_timer > 0 ? Q.advisor_roster_timer + " months" : "available";
+!}
+
+= Advisor Panel
+
+Active advisors: **[+ active_advisor_summary +]**
+
+Advisor action cooldown: [+ advisor_action_status +]  
+Switch leadership cooldown: [+ advisor_roster_status +]  
+Roster size: [+ n_advisors +] / [+ max_advisors +]
+
+The active leadership team determines which Advisor Action cards can be drawn. Switching leadership opens the roster, lets you remove and add advisors, and only spends one monthly action when you confirm a changed roster.
+
+- @switch_leadership_start: Switch leadership.
+- @root: Return to main.
+
+@switch_leadership_card
+title: Switch Leadership
 new-page: true
 is-card: true
 is-pinned-card: true
 card-image: img/portraits/placeholder.jpg
 view-if: started and advisor_roster_timer <= 0
+choose-if: month_actions < actions_per_month
+unavailable-subtitle: No monthly action remaining.
+go-to: switch_leadership_start
 
-= Advisor Roster
-
-The SLD can keep **[+ max_advisors +]** active advisors. Changing the roster uses this month's action and locks roster changes for six months.
-
-Active advisors: [+ n_advisors +] / [+ max_advisors +]
-
-Recruit or release advisors:
-
-- @recruit_czarzasty: Recruit Wlodzimierz Czarzasty.
-- @recruit_trela: Recruit Tomasz Trela.
-- @recruit_jonski: Recruit Dariusz Jonski.
-- @recruit_biedron: Recruit Robert Biedron.
-- @recruit_wanda_nowicka: Recruit Wanda Nowicka.
-- @recruit_barbara_nowacka: Recruit Barbara Nowacka.
-- @recruit_ikonowicz: Recruit Piotr Ikonowicz.
-- @recruit_kwasniewski: Recruit Aleksander Kwasniewski.
-- @recruit_belka: Recruit Marek Belka.
-- @recruit_cimoszewicz: Recruit Wlodzimierz Cimoszewicz.
-- @release_miller: Release Leszek Miller.
-- @release_gawkowski: Release Krzysztof Gawkowski.
-- @release_senyszyn: Release Joanna Senyszyn.
-- @release_czarzasty: Release Wlodzimierz Czarzasty.
-- @release_trela: Release Tomasz Trela.
-- @release_jonski: Release Dariusz Jonski.
-- @release_biedron: Release Robert Biedron.
-- @release_wanda_nowicka: Release Wanda Nowicka.
-- @release_barbara_nowacka: Release Barbara Nowacka.
-- @release_ikonowicz: Release Piotr Ikonowicz.
-- @release_kwasniewski: Release Aleksander Kwasniewski.
-- @release_belka: Release Marek Belka.
-- @release_cimoszewicz: Release Wlodzimierz Cimoszewicz.
-- @root: Return to main.
-
-@recruit_czarzasty
-title: Recruit Wlodzimierz Czarzasty
-view-if: n_advisors < max_advisors and czarzasty_advisor = 0
+@switch_leadership_start
+title: Switch Leadership
+new-page: true
+choose-if: advisor_roster_timer <= 0 and month_actions < actions_per_month
+unavailable-subtitle: [? if advisor_roster_timer > 0 : Leadership can be switched again in [+ advisor_roster_timer +] months. ?][? if month_actions >= actions_per_month : No monthly action remaining. ?]
 on-arrival: {!
-Q.czarzasty_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.3);
-Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 6);
-Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 4);
+function flag(value) {
+    return value ? 1 : 0;
+}
+Q.advisor_snapshot_miller = flag(Q.miller_advisor);
+Q.advisor_snapshot_gawkowski = flag(Q.gawkowski_advisor);
+Q.advisor_snapshot_senyszyn = flag(Q.senyszyn_advisor);
+Q.advisor_snapshot_czarzasty = flag(Q.czarzasty_advisor);
+Q.advisor_snapshot_trela = flag(Q.trela_advisor);
+Q.advisor_snapshot_jonski = flag(Q.jonski_advisor);
+Q.advisor_snapshot_biedron = flag(Q.biedron_advisor);
+Q.advisor_snapshot_wanda_nowicka = flag(Q.wanda_nowicka_advisor);
+Q.advisor_snapshot_barbara_nowacka = flag(Q.barbara_nowacka_advisor);
+Q.advisor_snapshot_ikonowicz = flag(Q.ikonowicz_advisor);
+Q.advisor_snapshot_kwasniewski = flag(Q.kwasniewski_advisor);
+Q.advisor_snapshot_belka = flag(Q.belka_advisor);
+Q.advisor_snapshot_cimoszewicz = flag(Q.cimoszewicz_advisor);
+Q.advisor_snapshot_count = Q.n_advisors || 0;
+Q.advisor_roster_changed = 0;
+!}
+go-to: leadership_main
+
+@leadership_main
+title: Switch Leadership
+new-page: true
+on-arrival: {!
+function countAdvisors() {
+    const ids = ["miller", "gawkowski", "senyszyn", "czarzasty", "trela", "jonski", "biedron", "wanda_nowicka", "barbara_nowacka", "ikonowicz", "kwasniewski", "belka", "cimoszewicz"];
+    let count = 0;
+    for (const id of ids) {
+        if (Q[id + "_advisor"]) count += 1;
+    }
+    return count;
+}
+function advisorNames() {
+    const names = [];
+    if (Q.miller_advisor) names.push("Leszek Miller");
+    if (Q.gawkowski_advisor) names.push("Krzysztof Gawkowski");
+    if (Q.senyszyn_advisor) names.push("Joanna Senyszyn");
+    if (Q.czarzasty_advisor) names.push("Wlodzimierz Czarzasty");
+    if (Q.trela_advisor) names.push("Tomasz Trela");
+    if (Q.jonski_advisor) names.push("Dariusz Jonski");
+    if (Q.biedron_advisor) names.push("Robert Biedron");
+    if (Q.wanda_nowicka_advisor) names.push("Wanda Nowicka");
+    if (Q.barbara_nowacka_advisor) names.push("Barbara Nowacka");
+    if (Q.ikonowicz_advisor) names.push("Piotr Ikonowicz");
+    if (Q.kwasniewski_advisor) names.push("Aleksander Kwasniewski");
+    if (Q.belka_advisor) names.push("Marek Belka");
+    if (Q.cimoszewicz_advisor) names.push("Wlodzimierz Cimoszewicz");
+    return names.length ? names.join(", ") : "none";
+}
+Q.n_advisors = countAdvisors();
+Q.active_advisor_summary = advisorNames();
+Q.open_advisor_slots = Math.max(0, (Q.max_advisors || 3) - Q.n_advisors);
 !}
 
-Czarzasty joins the active advisor roster as an apparatus and media operator.
+= Switch Leadership
 
-- @post_event: Continue.
+Active advisors: **[+ active_advisor_summary +]**  
+Open slots: [+ open_advisor_slots +]  
+[? if advisor_roster_changed: Unconfirmed roster changes are pending. ?]
 
-@recruit_trela
-title: Recruit Tomasz Trela
-view-if: n_advisors < max_advisors and trela_advisor = 0
-on-arrival: {!
-Q.trela_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
-Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 5);
-Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 3);
-!}
+Changing the leadership team changes the Advisor Actions deck. Confirming any changed roster spends this month's action and starts a six-month leadership cooldown.
 
-Trela joins the active advisor roster as a regional and mid-generation organizer.
+- @leadership_remove_menu: Remove advisors.
+- @leadership_add_menu: Add advisors.
+- @leadership_confirm: Confirm leadership team.
+- @leadership_cancel: Cancel changes.
 
-- @post_event: Continue.
+@leadership_remove_menu
+title: Remove Advisors
+new-page: true
 
-@recruit_jonski
-title: Recruit Dariusz Jonski
-view-if: n_advisors < max_advisors and jonski_advisor = 0
-on-arrival: {!
-Q.jonski_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.media_reach = Math.min(10, Q.media_reach + 0.2);
-Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
-Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 3);
-!}
+= Remove Advisors
 
-Jonski joins the active advisor roster as a combative spokesman.
+Active advisors: **[+ active_advisor_summary +]**
 
-- @post_event: Continue.
+- @leadership_remove_miller: Remove Leszek Miller.
+- @leadership_remove_gawkowski: Remove Krzysztof Gawkowski.
+- @leadership_remove_senyszyn: Remove Joanna Senyszyn.
+- @leadership_remove_czarzasty: Remove Wlodzimierz Czarzasty.
+- @leadership_remove_trela: Remove Tomasz Trela.
+- @leadership_remove_jonski: Remove Dariusz Jonski.
+- @leadership_remove_biedron: Remove Robert Biedron.
+- @leadership_remove_wanda_nowicka: Remove Wanda Nowicka.
+- @leadership_remove_barbara_nowacka: Remove Barbara Nowacka.
+- @leadership_remove_ikonowicz: Remove Piotr Ikonowicz.
+- @leadership_remove_kwasniewski: Remove Aleksander Kwasniewski.
+- @leadership_remove_belka: Remove Marek Belka.
+- @leadership_remove_cimoszewicz: Remove Wlodzimierz Cimoszewicz.
+- @leadership_main: Back.
 
-@recruit_biedron
-title: Recruit Robert Biedron
-view-if: n_advisors < max_advisors and biedron_advisor = 0
-on-arrival: {!
-Q.biedron_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.tr_residue_strength = Math.min(10, Q.tr_residue_strength + 0.3);
-Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 8);
-Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 8);
-!}
+@leadership_add_menu
+title: Add Advisors
+new-page: true
 
-Biedron joins the active advisor roster as the clearest liberal-progressive and local-renewal figure.
+= Add Advisors
 
-- @post_event: Continue.
+Active advisors: **[+ active_advisor_summary +]**  
+Open slots: [+ open_advisor_slots +]
 
-@recruit_wanda_nowicka
-title: Recruit Wanda Nowicka
-view-if: n_advisors < max_advisors and wanda_nowicka_advisor = 0
-on-arrival: {!
-Q.wanda_nowicka_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 7);
-Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.2);
-Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 4);
-!}
+- @leadership_add_miller: Add Leszek Miller.
+- @leadership_add_gawkowski: Add Krzysztof Gawkowski.
+- @leadership_add_czarzasty: Add Wlodzimierz Czarzasty.
+- @leadership_add_trela: Add Tomasz Trela.
+- @leadership_add_jonski: Add Dariusz Jonski.
+- @leadership_add_senyszyn: Add Joanna Senyszyn.
+- @leadership_add_biedron: Add Robert Biedron.
+- @leadership_add_wanda_nowicka: Add Wanda Nowicka.
+- @leadership_add_barbara_nowacka: Add Barbara Nowacka.
+- @leadership_add_ikonowicz: Add Piotr Ikonowicz.
+- @leadership_add_kwasniewski: Add Aleksander Kwasniewski.
+- @leadership_add_belka: Add Marek Belka.
+- @leadership_add_cimoszewicz: Add Wlodzimierz Cimoszewicz.
+- @leadership_main: Back.
 
-Nowicka joins the active advisor roster as a feminist and parliamentary bridge to the Palikot-era left.
-
-- @post_event: Continue.
-
-@recruit_barbara_nowacka
-title: Recruit Barbara Nowacka
-view-if: n_advisors < max_advisors and barbara_nowacka_advisor = 0 and year >= 2015
-on-arrival: {!
-Q.barbara_nowacka_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 6);
-Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 4);
-Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 6);
-!}
-
-Nowacka joins the active advisor roster as a possible 2015 broad-left public face.
-
-- @post_event: Continue.
-
-@recruit_ikonowicz
-title: Recruit Piotr Ikonowicz
-view-if: n_advisors < max_advisors and ikonowicz_advisor = 0
-on-arrival: {!
-Q.ikonowicz_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.3);
-Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 8);
-Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 5);
-Q.ko_relation -= 1;
-!}
-
-Ikonowicz joins the active advisor roster as a socialist and tenant-defense voice.
-
-- @post_event: Continue.
-
-@recruit_kwasniewski
-title: Recruit Aleksander Kwasniewski
-view-if: n_advisors < max_advisors and kwasniewski_advisor = 0
-on-arrival: {!
-Q.kwasniewski_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.3);
-Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 3);
-Q.ko_relation += 1;
-!}
-
-Kwasniewski joins the active advisor roster as an elder statesman.
-
-- @post_event: Continue.
-
-@recruit_belka
-title: Recruit Marek Belka
-view-if: n_advisors < max_advisors and belka_advisor = 0
-on-arrival: {!
-Q.belka_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.public_finance_pressure = Math.max(0, Q.public_finance_pressure - 0.2);
-Q.pps_up_tension = Math.min(150, Q.pps_up_tension + 3);
-Q.ko_relation += 1;
-!}
-
-Belka joins the active advisor roster as a macroeconomic credibility figure.
-
-- @post_event: Continue.
-
-@recruit_cimoszewicz
-title: Recruit Wlodzimierz Cimoszewicz
-view-if: n_advisors < max_advisors and cimoszewicz_advisor = 0
-on-arrival: {!
-Q.cimoszewicz_advisor = 1;
-Q.n_advisors += 1;
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.2);
-Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 3);
-Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 3);
-!}
-
-Cimoszewicz joins the active advisor roster as a diplomatic and elder-left validator.
-
-- @post_event: Continue.
-
-@release_miller
-title: Release Leszek Miller
+@leadership_remove_miller
+title: Remove Leszek Miller
 view-if: miller_advisor = 1
-on-arrival: {!
-Q.miller_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 16);
-Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.3);
-!}
+on-arrival: miller_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Miller leaves the active advisor roster. The apparatus treats this as a direct political signal.
-
-- @post_event: Continue.
-
-@release_gawkowski
-title: Release Krzysztof Gawkowski
+@leadership_remove_gawkowski
+title: Remove Krzysztof Gawkowski
 view-if: gawkowski_advisor = 1
-on-arrival: {!
-Q.gawkowski_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 10);
-Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 12);
-Q.left_regional_rebuild = Math.max(0, Q.left_regional_rebuild - 0.5);
-!}
+on-arrival: gawkowski_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Gawkowski leaves the active advisor roster. The younger organizational layer feels pushed aside.
-
-- @post_event: Continue.
-
-@release_senyszyn
-title: Release Joanna Senyszyn
+@leadership_remove_senyszyn
+title: Remove Joanna Senyszyn
 view-if: senyszyn_advisor = 1
-on-arrival: {!
-Q.senyszyn_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 6);
-Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 5);
-Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 3);
-!}
+on-arrival: senyszyn_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Senyszyn leaves the active advisor roster. The public secular edge dulls.
-
-- @post_event: Continue.
-
-@release_czarzasty
-title: Release Wlodzimierz Czarzasty
+@leadership_remove_czarzasty
+title: Remove Wlodzimierz Czarzasty
 view-if: czarzasty_advisor = 1
-on-arrival: {!
-Q.czarzasty_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 10);
-Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 2);
-!}
+on-arrival: czarzasty_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Czarzasty leaves the active advisor roster. His network does not disappear; it becomes less cooperative.
-
-- @post_event: Continue.
-
-@release_trela
-title: Release Tomasz Trela
+@leadership_remove_trela
+title: Remove Tomasz Trela
 view-if: trela_advisor = 1
-on-arrival: {!
-Q.trela_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 6);
-Q.left_regional_rebuild = Math.max(0, Q.left_regional_rebuild - 0.3);
-!}
+on-arrival: trela_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Trela leaves the active advisor roster. The regional rebuild loses a bridge figure.
-
-- @post_event: Continue.
-
-@release_jonski
-title: Release Dariusz Jonski
+@leadership_remove_jonski
+title: Remove Dariusz Jonski
 view-if: jonski_advisor = 1
-on-arrival: {!
-Q.jonski_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.media_reach = Math.max(0, Q.media_reach - 0.2);
-Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 5);
-!}
+on-arrival: jonski_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Jonski leaves the active advisor roster. The daily media line becomes less aggressive.
-
-- @post_event: Continue.
-
-@release_biedron
-title: Release Robert Biedron
+@leadership_remove_biedron
+title: Remove Robert Biedron
 view-if: biedron_advisor = 1
-on-arrival: {!
-Q.biedron_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 12);
-Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 3);
-!}
+on-arrival: biedron_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Biedron leaves the active advisor roster. Liberal-progressive allies read it as an SLD-first turn.
-
-- @post_event: Continue.
-
-@release_wanda_nowicka
-title: Release Wanda Nowicka
+@leadership_remove_wanda_nowicka
+title: Remove Wanda Nowicka
 view-if: wanda_nowicka_advisor = 1
-on-arrival: {!
-Q.wanda_nowicka_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 9);
-Q.civil_society_capital = Math.max(0, Q.civil_society_capital - 0.2);
-!}
+on-arrival: wanda_nowicka_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Nowicka leaves the active advisor roster. The feminist parliamentary channel weakens.
-
-- @post_event: Continue.
-
-@release_barbara_nowacka
-title: Release Barbara Nowacka
+@leadership_remove_barbara_nowacka
+title: Remove Barbara Nowacka
 view-if: barbara_nowacka_advisor = 1
-on-arrival: {!
-Q.barbara_nowacka_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 8);
-Q.pps_up_tension = Math.min(150, Q.pps_up_tension + 5);
-Q.nowacka_unity_mandate = Math.max(0, Q.nowacka_unity_mandate - 1);
-!}
+on-arrival: barbara_nowacka_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Nowacka leaves the active advisor roster. The broad-left public-face option narrows.
-
-- @post_event: Continue.
-
-@release_ikonowicz
-title: Release Piotr Ikonowicz
+@leadership_remove_ikonowicz
+title: Remove Piotr Ikonowicz
 view-if: ikonowicz_advisor = 1
-on-arrival: {!
-Q.ikonowicz_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.pps_up_tension = Math.min(150, Q.pps_up_tension + 12);
-Q.ko_relation += 1;
-!}
+on-arrival: ikonowicz_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Ikonowicz leaves the active advisor roster. The socialist edge feels traded away.
-
-- @post_event: Continue.
-
-@release_kwasniewski
-title: Release Aleksander Kwasniewski
+@leadership_remove_kwasniewski
+title: Remove Aleksander Kwasniewski
 view-if: kwasniewski_advisor = 1
-on-arrival: {!
-Q.kwasniewski_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.left_brand_strength = Math.max(0, Q.left_brand_strength - 0.2);
-Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 4);
-!}
+on-arrival: kwasniewski_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Kwasniewski leaves the active advisor roster. The presidential-era legitimacy fades back into the background.
-
-- @post_event: Continue.
-
-@release_belka
-title: Release Marek Belka
+@leadership_remove_belka
+title: Remove Marek Belka
 view-if: belka_advisor = 1
-on-arrival: {!
-Q.belka_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 2);
-Q.ko_relation -= 1;
-!}
+on-arrival: belka_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
 
-Belka leaves the active advisor roster. The party loses a layer of economic reassurance.
-
-- @post_event: Continue.
-
-@release_cimoszewicz
-title: Release Wlodzimierz Cimoszewicz
+@leadership_remove_cimoszewicz
+title: Remove Wlodzimierz Cimoszewicz
 view-if: cimoszewicz_advisor = 1
+on-arrival: cimoszewicz_advisor = 0; n_advisors -= 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_miller
+title: Add Leszek Miller
+view-if: miller_advisor = 0 and n_advisors < max_advisors
+on-arrival: miller_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_gawkowski
+title: Add Krzysztof Gawkowski
+view-if: gawkowski_advisor = 0 and n_advisors < max_advisors and not gawkowski_network_split
+on-arrival: gawkowski_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_senyszyn
+title: Add Joanna Senyszyn
+view-if: senyszyn_advisor = 0 and n_advisors < max_advisors
+on-arrival: senyszyn_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_czarzasty
+title: Add Wlodzimierz Czarzasty
+view-if: czarzasty_advisor = 0 and n_advisors < max_advisors and not sld_apparatus_split
+on-arrival: czarzasty_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_trela
+title: Add Tomasz Trela
+view-if: trela_advisor = 0 and n_advisors < max_advisors and not sld_modernizers_split
+on-arrival: trela_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_jonski
+title: Add Dariusz Jonski
+view-if: jonski_advisor = 0 and n_advisors < max_advisors and not sld_modernizers_split
+on-arrival: jonski_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_biedron
+title: Add Robert Biedron
+view-if: biedron_advisor = 0 and n_advisors < max_advisors and not tr_residue_split
+on-arrival: biedron_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_wanda_nowicka
+title: Add Wanda Nowicka
+view-if: wanda_nowicka_advisor = 0 and n_advisors < max_advisors and not tr_residue_split
+on-arrival: wanda_nowicka_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_barbara_nowacka
+title: Add Barbara Nowacka
+view-if: barbara_nowacka_advisor = 0 and n_advisors < max_advisors and year >= 2015 and not tr_residue_split
+on-arrival: barbara_nowacka_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_ikonowicz
+title: Add Piotr Ikonowicz
+view-if: ikonowicz_advisor = 0 and n_advisors < max_advisors and not pps_up_split
+on-arrival: ikonowicz_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_kwasniewski
+title: Add Aleksander Kwasniewski
+view-if: kwasniewski_advisor = 0 and n_advisors < max_advisors
+on-arrival: kwasniewski_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_belka
+title: Add Marek Belka
+view-if: belka_advisor = 0 and n_advisors < max_advisors
+on-arrival: belka_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_add_cimoszewicz
+title: Add Wlodzimierz Cimoszewicz
+view-if: cimoszewicz_advisor = 0 and n_advisors < max_advisors
+on-arrival: cimoszewicz_advisor = 1; n_advisors += 1; advisor_roster_changed = 1
+go-to: leadership_main
+
+@leadership_confirm
+title: Confirm Leadership Team
+new-page: true
 on-arrival: {!
-Q.cimoszewicz_advisor = 0;
-Q.n_advisors = Math.max(0, Q.n_advisors - 1);
-Q.advisor_roster_timer = 6;
-Q.month_actions += 1;
-Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 5);
-Q.eu_institutional_alignment = Math.max(0, Q.eu_institutional_alignment - 0.1);
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+function flag(id) {
+    return Q[id + "_advisor"] ? 1 : 0;
+}
+function snapshot(id) {
+    return Q["advisor_snapshot_" + id] ? 1 : 0;
+}
+function displayName(id) {
+    const names = {
+        miller: "Miller",
+        gawkowski: "Gawkowski",
+        senyszyn: "Senyszyn",
+        czarzasty: "Czarzasty",
+        trela: "Trela",
+        jonski: "Jonski",
+        biedron: "Biedron",
+        wanda_nowicka: "Nowicka",
+        barbara_nowacka: "Nowacka",
+        ikonowicz: "Ikonowicz",
+        kwasniewski: "Kwasniewski",
+        belka: "Belka",
+        cimoszewicz: "Cimoszewicz"
+    };
+    return names[id] || id;
+}
+function applyAdd(id) {
+    if (id == "miller") {
+        Q.sld_apparatus_strength = clamp((Q.sld_apparatus_strength || 0) + 0.4, 0, 10);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) - 10, 0, 150);
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) + 4, 0, 150);
+        Q.gawkowski_network_tension = clamp((Q.gawkowski_network_tension || 0) + 4, 0, 150);
+    }
+    if (id == "gawkowski") {
+        Q.gawkowski_network_strength = clamp((Q.gawkowski_network_strength || 0) + 0.4, 0, 10);
+        Q.gawkowski_network_tension = clamp((Q.gawkowski_network_tension || 0) - 8, 0, 150);
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) - 4, 0, 150);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 3, 0, 150);
+    }
+    if (id == "senyszyn") {
+        Q.media_reach = clamp((Q.media_reach || 0) + 0.2, 0, 10);
+        Q.secularization_tide = clamp((Q.secularization_tide || 0) + 0.2, 0, 10);
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) - 4, 0, 150);
+        Q.tr_residue_tension = clamp((Q.tr_residue_tension || 0) - 3, 0, 150);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 3, 0, 150);
+    }
+    if (id == "czarzasty") {
+        Q.sld_apparatus_strength = clamp((Q.sld_apparatus_strength || 0) + 0.3, 0, 10);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) - 6, 0, 150);
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) + 4, 0, 150);
+    }
+    if (id == "trela") {
+        Q.sld_modernizers_strength = clamp((Q.sld_modernizers_strength || 0) + 0.2, 0, 10);
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) - 5, 0, 150);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) - 3, 0, 150);
+    }
+    if (id == "jonski") {
+        Q.media_reach = clamp((Q.media_reach || 0) + 0.2, 0, 10);
+        Q.sld_modernizers_strength = clamp((Q.sld_modernizers_strength || 0) + 0.2, 0, 10);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 3, 0, 150);
+    }
+    if (id == "biedron") {
+        Q.tr_residue_strength = clamp((Q.tr_residue_strength || 0) + 0.3, 0, 10);
+        Q.tr_residue_tension = clamp((Q.tr_residue_tension || 0) - 8, 0, 150);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 8, 0, 150);
+    }
+    if (id == "wanda_nowicka") {
+        Q.tr_residue_tension = clamp((Q.tr_residue_tension || 0) - 7, 0, 150);
+        Q.civil_society_capital = clamp((Q.civil_society_capital || 0) + 0.2, 0, 10);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 4, 0, 150);
+    }
+    if (id == "barbara_nowacka") {
+        Q.tr_residue_tension = clamp((Q.tr_residue_tension || 0) - 6, 0, 150);
+        Q.pps_up_tension = clamp((Q.pps_up_tension || 0) - 4, 0, 150);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 6, 0, 150);
+    }
+    if (id == "ikonowicz") {
+        Q.pps_up_strength = clamp((Q.pps_up_strength || 0) + 0.3, 0, 10);
+        Q.pps_up_tension = clamp((Q.pps_up_tension || 0) - 8, 0, 150);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 5, 0, 150);
+        Q.ko_relation -= 1;
+    }
+    if (id == "kwasniewski") {
+        Q.left_brand_strength = clamp((Q.left_brand_strength || 0) + 0.3, 0, 10);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) - 3, 0, 150);
+        Q.ko_relation += 1;
+    }
+    if (id == "belka") {
+        Q.public_finance_pressure = clamp((Q.public_finance_pressure || 0) - 0.2, 0, 10);
+        Q.pps_up_tension = clamp((Q.pps_up_tension || 0) + 3, 0, 150);
+        Q.ko_relation += 1;
+    }
+    if (id == "cimoszewicz") {
+        Q.eu_institutional_alignment = clamp((Q.eu_institutional_alignment || 0) + 0.2, 0, 10);
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) - 3, 0, 150);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 3, 0, 150);
+    }
+}
+function applyRemove(id) {
+    if (id == "miller") {
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 16, 0, 150);
+        Q.gawkowski_network_strength = clamp((Q.gawkowski_network_strength || 0) + 0.3, 0, 10);
+    }
+    if (id == "gawkowski") {
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) + 10, 0, 150);
+        Q.gawkowski_network_tension = clamp((Q.gawkowski_network_tension || 0) + 12, 0, 150);
+        Q.left_regional_rebuild = Math.max(0, (Q.left_regional_rebuild || 0) - 0.5);
+    }
+    if (id == "senyszyn") {
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) + 6, 0, 150);
+        Q.tr_residue_tension = clamp((Q.tr_residue_tension || 0) + 5, 0, 150);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) - 3, 0, 150);
+    }
+    if (id == "czarzasty") {
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 10, 0, 150);
+        Q.gawkowski_network_tension = clamp((Q.gawkowski_network_tension || 0) - 2, 0, 150);
+    }
+    if (id == "trela") {
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) + 6, 0, 150);
+        Q.left_regional_rebuild = Math.max(0, (Q.left_regional_rebuild || 0) - 0.3);
+    }
+    if (id == "jonski") {
+        Q.media_reach = Math.max(0, (Q.media_reach || 0) - 0.2);
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) + 5, 0, 150);
+    }
+    if (id == "biedron") {
+        Q.tr_residue_tension = clamp((Q.tr_residue_tension || 0) + 12, 0, 150);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) - 3, 0, 150);
+    }
+    if (id == "wanda_nowicka") {
+        Q.tr_residue_tension = clamp((Q.tr_residue_tension || 0) + 9, 0, 150);
+        Q.civil_society_capital = Math.max(0, (Q.civil_society_capital || 0) - 0.2);
+    }
+    if (id == "barbara_nowacka") {
+        Q.tr_residue_tension = clamp((Q.tr_residue_tension || 0) + 8, 0, 150);
+        Q.pps_up_tension = clamp((Q.pps_up_tension || 0) + 5, 0, 150);
+        Q.nowacka_unity_mandate = Math.max(0, (Q.nowacka_unity_mandate || 0) - 1);
+    }
+    if (id == "ikonowicz") {
+        Q.pps_up_tension = clamp((Q.pps_up_tension || 0) + 12, 0, 150);
+        Q.ko_relation += 1;
+    }
+    if (id == "kwasniewski") {
+        Q.left_brand_strength = Math.max(0, (Q.left_brand_strength || 0) - 0.2);
+        Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + 4, 0, 150);
+    }
+    if (id == "belka") {
+        Q.pps_up_tension = clamp((Q.pps_up_tension || 0) - 2, 0, 150);
+        Q.ko_relation -= 1;
+    }
+    if (id == "cimoszewicz") {
+        Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) + 5, 0, 150);
+        Q.eu_institutional_alignment = Math.max(0, (Q.eu_institutional_alignment || 0) - 0.1);
+    }
+}
+const ids = ["miller", "gawkowski", "senyszyn", "czarzasty", "trela", "jonski", "biedron", "wanda_nowicka", "barbara_nowacka", "ikonowicz", "kwasniewski", "belka", "cimoszewicz"];
+const added = [];
+const removed = [];
+let count = 0;
+for (const id of ids) {
+    if (flag(id)) count += 1;
+    if (!snapshot(id) && flag(id)) {
+        added.push(displayName(id));
+        applyAdd(id);
+    }
+    if (snapshot(id) && !flag(id)) {
+        removed.push(displayName(id));
+        applyRemove(id);
+    }
+}
+Q.n_advisors = count;
+if (added.length || removed.length) {
+    Q.month_actions += 1;
+    Q.advisor_roster_timer = 6;
+    Q.advisor_roster_changes = (Q.advisor_roster_changes || 0) + 1;
+    Q.advisor_last_roster_change = "Added: " + (added.length ? added.join(", ") : "none") + "; removed: " + (removed.length ? removed.join(", ") : "none");
+} else {
+    Q.advisor_roster_timer = 0;
+    Q.advisor_last_roster_change = "No leadership changes";
+}
+Q.advisor_roster_changed = 0;
 !}
 
-Cimoszewicz leaves the active advisor roster. The foreign-policy elder channel closes.
+The leadership team is confirmed.
+
+Last change: [+ advisor_last_roster_change +]
 
 - @post_event: Continue.
+
+@leadership_cancel
+title: Cancel Leadership Changes
+new-page: true
+on-arrival: {!
+Q.miller_advisor = Q.advisor_snapshot_miller || 0;
+Q.gawkowski_advisor = Q.advisor_snapshot_gawkowski || 0;
+Q.senyszyn_advisor = Q.advisor_snapshot_senyszyn || 0;
+Q.czarzasty_advisor = Q.advisor_snapshot_czarzasty || 0;
+Q.trela_advisor = Q.advisor_snapshot_trela || 0;
+Q.jonski_advisor = Q.advisor_snapshot_jonski || 0;
+Q.biedron_advisor = Q.advisor_snapshot_biedron || 0;
+Q.wanda_nowicka_advisor = Q.advisor_snapshot_wanda_nowicka || 0;
+Q.barbara_nowacka_advisor = Q.advisor_snapshot_barbara_nowacka || 0;
+Q.ikonowicz_advisor = Q.advisor_snapshot_ikonowicz || 0;
+Q.kwasniewski_advisor = Q.advisor_snapshot_kwasniewski || 0;
+Q.belka_advisor = Q.advisor_snapshot_belka || 0;
+Q.cimoszewicz_advisor = Q.advisor_snapshot_cimoszewicz || 0;
+Q.n_advisors = Q.advisor_snapshot_count || 0;
+Q.advisor_roster_changed = 0;
+Q.advisor_last_roster_change = "Cancelled";
+!}
+
+No leadership changes are made.
+
+- @root: Return to main.
