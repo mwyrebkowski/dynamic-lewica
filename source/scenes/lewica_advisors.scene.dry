@@ -1,0 +1,1022 @@
+title: Lewica Advisors
+
+@leszek_miller
+title: Leszek Miller
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: miller_advisor = 1
+
+= Leszek Miller
+
+Former prime minister, SLD chair, and the dominant figure of the 2014 party center. Miller is useful when the party needs discipline, parliamentary seriousness, or money, but his methods harden the younger and liberal-left wings.
+
+- @miller_apparatus_discipline: Enforce apparatus discipline.
+- @miller_emergency_fundraising: Emergency fundraising.
+- @miller_coalition_respectability: Present SLD as the responsible governing left.
+- @root: Return to main.
+
+@miller_apparatus_discipline
+title: Enforce Apparatus Discipline
+subtitle: Reduce apparatus tension; raises modernizer and TR tension.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Miller: apparatus discipline";
+Q.month_actions += 1;
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 18);
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.4);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 8);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 6);
+Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 6);
+!}
+
+Miller leans on the regional chairs and the Sejm club. The apparatus quiets down, but reformers read it as another month of central-office rule.
+
+- @post_event: Continue.
+
+@miller_emergency_fundraising
+title: Emergency Fundraising
+subtitle: +2 resources; repeated use strains the party.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Miller: emergency fundraising";
+Q.month_actions += 1;
+Q.emergency_fundraising_used += 1;
+Q.resources = Math.min(10, Q.resources + 2);
+Q.party_resources = Q.resources;
+if (Q.emergency_fundraising_used > 1) {
+    Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 6);
+    Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 8);
+    Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 8);
+    Q.pps_up_tension = Math.min(150, Q.pps_up_tension + 6);
+    Q.urban_working_class_left = Math.max(0, Q.urban_working_class_left - 0.5);
+    Q.under_30_left = Math.max(0, Q.under_30_left - 0.5);
+}
+!}
+
+The old donor and local-government network can still produce cash. If used too often, members start to feel that survival is replacing politics.
+
+- @post_event: Continue.
+
+@miller_coalition_respectability
+title: Responsible Governing Left
+subtitle: Improve PO and PSL channels.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Miller: coalition respectability";
+Q.month_actions += 1;
+Q.ko_relation += 4;
+Q.psl_relation += 2;
+Q.urban_professionals_left += 0.8 * (1 - Q.dissent);
+Q.age_65_plus_left += 0.6 * (1 - Q.dissent);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 8);
+Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 5);
+Q.pps_up_tension = Math.min(150, Q.pps_up_tension + 4);
+!}
+
+The message is that SLD knows how to govern and will not burn down institutions for attention. It comforts older voters and coalition insiders.
+
+- @post_event: Continue.
+
+@krzysztof_gawkowski
+title: Krzysztof Gawkowski
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: gawkowski_advisor = 1
+
+= Krzysztof Gawkowski
+
+Secretary-general, organizer, and a younger technocratic face of the SLD machine. Gawkowski works best where structure and modernization need to be reconciled.
+
+- @gawkowski_secretary_map: Secretary's map.
+- @gawkowski_modernization: Procedural modernization.
+- @gawkowski_unity_calendar: Draft a unity calendar.
+- @root: Return to main.
+
+@gawkowski_secretary_map
+title: Secretary's Map
+subtitle: Regional rebuild and lower apparatus tension.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Gawkowski: secretary map";
+Q.month_actions += 1;
+Q.left_regional_rebuild += 1;
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.3);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.4);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 5);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 8);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 5);
+Q.rural_west_left += 0.6 * (1 - Q.dissent);
+Q.urban_working_class_left += 0.6 * (1 - Q.dissent);
+!}
+
+The secretary-general reviews weak counties, campaign committees, and mayoral races. It is unglamorous, but it gives the party more usable map.
+
+- @post_event: Continue.
+
+@gawkowski_modernization
+title: Procedural Modernization
+subtitle: Better media work and a stronger modernization bloc; apparatus tension rises.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Gawkowski: modernization";
+Q.month_actions += 1;
+Q.media_reach = Math.min(10, Q.media_reach + 0.8);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.4);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.4);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 3);
+Q.under_30_left += 0.8 * (1 - Q.dissent);
+Q.urban_professionals_left += 0.5 * (1 - Q.dissent);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 6);
+!}
+
+Gawkowski pushes clearer procedures, better online work, and a less dusty presentation. The older machine accepts the memo and resents the subtext.
+
+- @post_event: Continue.
+
+@gawkowski_unity_calendar
+title: Draft A Unity Calendar
+subtitle: Prepare coalition talks with non-SLD left actors.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Gawkowski: unity calendar";
+Q.month_actions += 1;
+Q.razem_relation += 2;
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.3);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.2);
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 6);
+Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 5);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 5);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+The party starts treating left unity as a sequence of deadlines rather than a slogan. Smaller partners appreciate the seriousness; SLD loyalists notice the concessions.
+
+- @post_event: Continue.
+
+@joanna_senyszyn
+title: Joanna Senyszyn
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: senyszyn_advisor = 1
+
+= Joanna Senyszyn
+
+Anticlerical, media-ready, and recognizable to the older SLD electorate. Senyszyn can sharpen the party's secular identity, but she is not subtle.
+
+- @senyszyn_anticlerical: Anticlerical speech.
+- @senyszyn_television: Professor on television.
+- @senyszyn_rebuke: Rebuke the leadership from the left.
+- @root: Return to main.
+
+@senyszyn_anticlerical
+title: Anticlerical Speech
+subtitle: Mobilize secular voters; raise apparatus tension.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Senyszyn: anticlerical speech";
+Q.month_actions += 1;
+Q.secularization_tide = Math.min(10, Q.secularization_tide + 0.5);
+Q.vatican_episcopate_alignment = Math.max(0, Q.vatican_episcopate_alignment - 0.7);
+Q.unaffiliated_left += 1.2 * (1 - Q.dissent);
+Q.lgbtq_left += 0.8 * (1 - Q.dissent);
+Q.catholic_practicing_left = Math.max(0, Q.catholic_practicing_left - 0.5);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 10);
+!}
+
+The party sounds unmistakably secular. It cuts through in liberal cities, and it gives clerical opponents a clean target.
+
+- @post_event: Continue.
+
+@senyszyn_television
+title: Professor On Television
+subtitle: Media reach and urban professional attention.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Senyszyn: television";
+Q.month_actions += 1;
+Q.media_reach = Math.min(10, Q.media_reach + 0.8);
+Q.urban_professionals_left += 0.9 * (1 - Q.dissent);
+Q.women_over_50_left += 0.5 * (1 - Q.dissent);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+A sharp studio performance reminds voters that SLD still has recognizable public figures.
+
+- @post_event: Continue.
+
+@senyszyn_rebuke
+title: Rebuke The Leadership From The Left
+subtitle: Lower modernizer and TR tension; pressure Miller.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Senyszyn: internal rebuke";
+Q.month_actions += 1;
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.3);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 4);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 8);
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 6);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 6);
+!}
+
+Senyszyn says out loud what many reform-minded members say privately. It releases pressure, but it makes the Miller camp more defensive.
+
+- @post_event: Continue.
+
+@wlodzimierz_czarzasty
+title: Wlodzimierz Czarzasty
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: czarzasty_advisor = 1
+
+= Wlodzimierz Czarzasty
+
+An apparatus operator with media instincts and a long memory. In 2014-2015 he is not yet the chair, but he is already a plausible post-Miller power center.
+
+- @czarzasty_media_backchannel: Media backchannel.
+- @czarzasty_regional_hardball: Hardball with regional chairs.
+- @czarzasty_positioning: Prepare the post-Miller option.
+- @root: Return to main.
+
+@czarzasty_media_backchannel
+title: Media Backchannel
+subtitle: Media reach and apparatus strength.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Czarzasty: media backchannel";
+Q.month_actions += 1;
+Q.media_reach = Math.min(10, Q.media_reach + 0.7);
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.3);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 5);
+Q.urban_professionals_left += 0.4 * (1 - Q.dissent);
+!}
+
+Czarzasty works the old media network and the informal phone tree. It is not elegant, but it gets the party covered.
+
+- @post_event: Continue.
+
+@czarzasty_regional_hardball
+title: Hardball With Regional Chairs
+subtitle: Strong discipline; reformers resent it.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Czarzasty: regional hardball";
+Q.month_actions += 1;
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.6);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 15);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 8);
+Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 5);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 5);
+!}
+
+The county machines receive a clear message: line up or lose access. The immediate effect is order.
+
+- @post_event: Continue.
+
+@czarzasty_positioning
+title: Prepare The Post-Miller Option
+subtitle: Builds an apparatus succession track while irritating rival factions.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Czarzasty: positioning";
+Q.month_actions += 1;
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.5);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 4);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 2);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 4);
+!}
+
+A post-Miller succession path becomes a little more real. That can stabilize the future while destabilizing the chair.
+
+- @post_event: Continue.
+
+@tomasz_trela
+title: Tomasz Trela
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: trela_advisor = 1
+
+= Tomasz Trela
+
+Lodz-based regional politician, useful for municipal credibility and for translating SLD survival politics into practical local organization.
+
+- @trela_lodz_machine: Lodz machine.
+- @trela_generation_bridge: Mid-generation bridge.
+- @trela_municipal_offer: Municipal services offer.
+- @root: Return to main.
+
+@trela_lodz_machine
+title: Lodz Machine
+subtitle: Regional rebuild and working-class support.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Trela: Lodz machine";
+Q.month_actions += 1;
+Q.left_regional_rebuild += 1;
+Q.urban_working_class_left += 1.1 * (1 - Q.dissent);
+Q.age_50_65_left += 0.5 * (1 - Q.dissent);
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.2);
+!}
+
+The party learns from places where it still has local muscle: housing offices, municipal companies, city councils, and campaign lists.
+
+- @post_event: Continue.
+
+@trela_generation_bridge
+title: Mid-Generation Bridge
+subtitle: Reduce apparatus and modernizer tension.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Trela: bridge";
+Q.month_actions += 1;
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 5);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 7);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 2);
+!}
+
+Trela gives younger SLD figures a way to move without declaring war on the party machine.
+
+- @post_event: Continue.
+
+@trela_municipal_offer
+title: Municipal Services Offer
+subtitle: Small-town western Poland and local credibility.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Trela: municipal offer";
+Q.month_actions += 1;
+Q.rural_west_left += 0.9 * (1 - Q.dissent);
+Q.urban_working_class_left += 0.7 * (1 - Q.dissent);
+Q.psl_relation = Math.max(-10, Q.psl_relation - 1);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+The party talks about buses, flats, schools, and municipal competence instead of only Warsaw coalition arithmetic.
+
+- @post_event: Continue.
+
+@dariusz_jonski
+title: Dariusz Jonski
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: jonski_advisor = 1
+
+= Dariusz Jonski
+
+SLD spokesman energy: fast, combative, and built for daily television politics. Useful for pressure campaigns, risky for coalition maintenance.
+
+- @jonski_attack_line: Daily attack line.
+- @jonski_scandal_press: Scandal press conference.
+- @jonski_local_candidate: Local candidate protection.
+- @root: Return to main.
+
+@jonski_attack_line
+title: Daily Attack Line
+subtitle: Media reach; stronger anti-government posture.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Jonski: attack line";
+Q.month_actions += 1;
+Q.media_reach = Math.min(10, Q.media_reach + 0.6);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+Q.ko_relation -= 1;
+Q.pis_relation -= 1;
+Q.urban_working_class_left += 0.5 * (1 - Q.dissent);
+!}
+
+Jonski gives morning shows a clean SLD line and refuses to disappear between election cycles.
+
+- @post_event: Continue.
+
+@jonski_scandal_press
+title: Scandal Press Conference
+subtitle: Damage PO trust; gain opposition attention.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Jonski: scandal press";
+Q.month_actions += 1;
+Q.media_reach = Math.min(10, Q.media_reach + 0.8);
+Q.ko_relation -= 3;
+Q.urban_working_class_ko = Math.max(0, Q.urban_working_class_ko - 0.6);
+Q.urban_working_class_left += 0.7 * (1 - Q.dissent);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 4);
+!}
+
+The party goes hard at liberal incumbency and expensive-government hypocrisy. It creates a news cycle and burns a bridge.
+
+- @post_event: Continue.
+
+@jonski_local_candidate
+title: Local Candidate Protection
+subtitle: Reduce regional revolt pressure.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Jonski: local protection";
+Q.month_actions += 1;
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 5);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 3);
+Q.left_regional_rebuild += 0.5;
+Q.rural_west_left += 0.4 * (1 - Q.dissent);
+!}
+
+Local candidates get rapid-response support instead of being left to absorb national-party damage alone.
+
+- @post_event: Continue.
+
+@robert_biedron
+title: Robert Biedron
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: biedron_advisor = 1
+
+= Robert Biedron
+
+In 2014, Biedron is the strongest proof that a modern, openly progressive left can win outside SLD's old grammar. He helps with urban, LGBTQ+, and local-government credibility.
+
+- @biedron_slupsk_model: Slupsk campaign model.
+- @biedron_lgbtq_mobilization: LGBTQ+ mobilization.
+- @biedron_civic_localism: Civic localism.
+- @root: Return to main.
+
+@biedron_slupsk_model
+title: Slupsk Campaign Model
+subtitle: Urban professionals, unaffiliated voters, and media.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Biedron: Slupsk model";
+Q.month_actions += 1;
+Q.media_reach = Math.min(10, Q.media_reach + 0.7);
+Q.urban_professionals_left += 1.0 * (1 - Q.dissent);
+Q.unaffiliated_left += 1.0 * (1 - Q.dissent);
+Q.under_30_left += 0.7 * (1 - Q.dissent);
+Q.tr_residue_strength = Math.min(10, Q.tr_residue_strength + 0.3);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 8);
+!}
+
+The party studies a local campaign that feels open, civic, and personally credible. SLD loyalists worry that the lesson is really about replacing SLD.
+
+- @post_event: Continue.
+
+@biedron_lgbtq_mobilization
+title: LGBTQ+ Mobilization
+subtitle: Strong identity gains; clerical backlash.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Biedron: LGBTQ mobilization";
+Q.month_actions += 1;
+Q.lgbtq_left += 2.0 * (1 - Q.dissent);
+Q.under_30_left += 0.8 * (1 - Q.dissent);
+Q.unaffiliated_left += 0.8 * (1 - Q.dissent);
+Q.vatican_episcopate_alignment = Math.max(0, Q.vatican_episcopate_alignment - 0.5);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 8);
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 8);
+!}
+
+This is the clearest modern-rights message available to the left in 2014.
+
+- @post_event: Continue.
+
+@biedron_civic_localism
+title: Civic Localism
+subtitle: Better city vote and PO-compatible reform image.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Biedron: civic localism";
+Q.month_actions += 1;
+Q.urban_professionals_left += 0.7 * (1 - Q.dissent);
+Q.rural_west_left += 0.4 * (1 - Q.dissent);
+Q.ko_relation += 1;
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.3);
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 4);
+!}
+
+The left sounds less like a parliamentary inheritance and more like competent local renewal.
+
+- @post_event: Continue.
+
+@wanda_nowicka
+title: Wanda Nowicka
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: wanda_nowicka_advisor = 1
+
+= Wanda Nowicka
+
+Former deputy speaker and feminist organizer from the Palikot-era liberal-left orbit. Nowicka gives the SLD access to women's-rights and parliamentary-bridge credibility.
+
+- @nowicka_feminist_bridge: Feminist parliamentary bridge.
+- @nowicka_reproductive_frame: Reproductive rights frame.
+- @nowicka_liberal_left_channel: Liberal-left channel.
+- @root: Return to main.
+
+@nowicka_feminist_bridge
+title: Feminist Parliamentary Bridge
+subtitle: Women under 50 and civil society.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Nowicka: feminist bridge";
+Q.month_actions += 1;
+Q.women_under_50_left += 1.4 * (1 - Q.dissent);
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.5);
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 7);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 4);
+!}
+
+The party reconnects with activists who do not trust SLD automatically but need parliamentary allies.
+
+- @post_event: Continue.
+
+@nowicka_reproductive_frame
+title: Reproductive Rights Frame
+subtitle: Secular and younger women gains; clerical backlash.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Nowicka: reproductive rights";
+Q.month_actions += 1;
+Q.women_under_50_left += 1.3 * (1 - Q.dissent);
+Q.unaffiliated_left += 0.8 * (1 - Q.dissent);
+Q.secularization_tide = Math.min(10, Q.secularization_tide + 0.3);
+Q.vatican_episcopate_alignment = Math.max(0, Q.vatican_episcopate_alignment - 0.5);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 5);
+!}
+
+The SLD adopts language closer to feminist organizations than to old parliamentary compromise.
+
+- @post_event: Continue.
+
+@nowicka_liberal_left_channel
+title: Liberal-Left Channel
+subtitle: Lower TR tension and improve list-unity options.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Nowicka: liberal-left channel";
+Q.month_actions += 1;
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 10);
+Q.tr_residue_strength = Math.min(10, Q.tr_residue_strength + 0.2);
+Q.ko_relation += 1;
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+The Palikot-world residue has a reason to stay in the room.
+
+- @post_event: Continue.
+
+@barbara_nowacka
+title: Barbara Nowacka
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: barbara_nowacka_advisor = 1
+
+= Barbara Nowacka
+
+The most plausible public face for a 2015 United Left list: young, feminist, less burdened by SLD history, and acceptable to several non-SLD partners.
+
+- @nowacka_public_face: United Left public face.
+- @nowacka_young_progressive_media: Young progressive media.
+- @nowacka_list_parity: List parity bargain.
+- @root: Return to main.
+
+@nowacka_public_face
+title: United Left Public Face
+subtitle: Brand boost and partner cohesion; apparatus tension rises.
+choose-if: advisor_action_timer <= 0 and year >= 2015
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if year < 2015 : This action belongs to the 2015 unity campaign. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Nowacka: public face";
+Q.month_actions += 1;
+Q.nowacka_unity_mandate = Math.min(10, Q.nowacka_unity_mandate + 2);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.8);
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 8);
+Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 6);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 8);
+Q.women_under_50_left += 0.8 * (1 - Q.dissent);
+Q.under_30_left += 0.7 * (1 - Q.dissent);
+!}
+
+The coalition can be introduced by someone who is not simply another SLD veteran. That is exactly why some veterans dislike it.
+
+- @post_event: Continue.
+
+@nowacka_young_progressive_media
+title: Young Progressive Media
+subtitle: Media reach and under-30 attention.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Nowacka: young progressive media";
+Q.month_actions += 1;
+Q.media_reach = Math.min(10, Q.media_reach + 0.7);
+Q.under_30_left += 1.1 * (1 - Q.dissent);
+Q.women_under_50_left += 0.7 * (1 - Q.dissent);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.3);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 5);
+!}
+
+The left gets a fresher television and online voice without abandoning parliamentary seriousness.
+
+- @post_event: Continue.
+
+@nowacka_list_parity
+title: List Parity Bargain
+subtitle: Lower partner tension; costs apparatus control.
+choose-if: advisor_action_timer <= 0 and year >= 2015
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if year < 2015 : The broad list is not yet on the table. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Nowacka: list parity";
+Q.month_actions += 1;
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 10);
+Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 8);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 4);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 12);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.2);
+!}
+
+Partners receive visible places rather than ceremonial signatures. The price is that SLD no longer fully owns the list.
+
+- @post_event: Continue.
+
+@piotr_ikonowicz
+title: Piotr Ikonowicz
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: ikonowicz_advisor = 1
+
+= Piotr Ikonowicz
+
+Old socialist, tenant defender, and social-justice outsider. He strengthens the class-left edge but is uncomfortable for both SLD pragmatists and liberal allies.
+
+- @ikonowicz_tenant_intervention: Tenant intervention.
+- @ikonowicz_social_justice_office: Social justice office.
+- @ikonowicz_working_class_authenticity: Working-class authenticity pitch.
+- @root: Return to main.
+
+@ikonowicz_tenant_intervention
+title: Tenant Intervention
+subtitle: Urban working-class gains and PPS/UP tension relief.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Ikonowicz: tenant intervention";
+Q.month_actions += 1;
+Q.urban_working_class_left += 1.6 * (1 - Q.dissent);
+Q.housing_pressure = Math.max(0, Q.housing_pressure - 0.2);
+Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 10);
+Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.3);
+Q.ko_relation -= 1;
+!}
+
+The left is seen helping people in concrete conflicts rather than only talking about public values.
+
+- @post_event: Continue.
+
+@ikonowicz_social_justice_office
+title: Social Justice Office
+subtitle: Costs resources; builds civil society and labor-left strength.
+choose-if: advisor_action_timer <= 0 and resources >= 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if resources < 1 : Not enough resources. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Ikonowicz: social justice office";
+Q.month_actions += 1;
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.7);
+Q.ip_union_strength = Math.min(10, Q.ip_union_strength + 0.4);
+Q.urban_working_class_left += 1.2 * (1 - Q.dissent);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 5);
+Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 8);
+!}
+
+The party funds legal and activist work around housing and labor insecurity. It is expensive, but it roots the left in visible social conflict.
+
+- @post_event: Continue.
+
+@ikonowicz_working_class_authenticity
+title: Working-Class Authenticity Pitch
+subtitle: Economic-left clarity; urban professionals less certain.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Ikonowicz: authenticity pitch";
+Q.month_actions += 1;
+Q.urban_working_class_left += 1.4 * (1 - Q.dissent);
+Q.age_50_65_left += 0.6 * (1 - Q.dissent);
+Q.urban_professionals_left = Math.max(0, Q.urban_professionals_left - 0.3);
+Q.razem_relation += 1;
+Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 6);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 4);
+!}
+
+The party sounds less like a nostalgia brand and more like a side in a class argument.
+
+- @post_event: Continue.
+
+@aleksander_kwasniewski
+title: Aleksander Kwasniewski
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: kwasniewski_advisor = 1
+
+= Aleksander Kwasniewski
+
+Former president, still the strongest proof that the Polish left once governed at the center of national life. His endorsement is powerful but finite.
+
+- @kwasniewski_endorsement: Senior statesman endorsement.
+- @kwasniewski_eu_legacy: EU accession legacy.
+- @kwasniewski_liberal_left_alliance: Liberal-left alliance signal.
+- @root: Return to main.
+
+@kwasniewski_endorsement
+title: Senior Statesman Endorsement
+subtitle: One-time major brand boost.
+choose-if: advisor_action_timer <= 0 and kwasniewski_endorsement_used = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if kwasniewski_endorsement_used > 0 : Kwasniewski has already spent this level of political capital. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Kwasniewski: endorsement";
+Q.month_actions += 1;
+Q.kwasniewski_endorsement_used = 1;
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 1.3);
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.5);
+Q.ko_relation += 2;
+Q.urban_professionals_left += 1.0 * (1 - Q.dissent);
+Q.age_65_plus_left += 1.0 * (1 - Q.dissent);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 5);
+!}
+
+Kwasniewski reminds voters that the left once produced presidents, accession, and governing competence.
+
+- @post_event: Continue.
+
+@kwasniewski_eu_legacy
+title: EU Accession Legacy
+subtitle: European credibility and older liberal-left voters.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Kwasniewski: EU legacy";
+Q.month_actions += 1;
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.6);
+Q.german_bilateral = Math.min(10, Q.german_bilateral + 0.3);
+Q.urban_professionals_left += 0.8 * (1 - Q.dissent);
+Q.catholic_nonpracticing_left += 0.5 * (1 - Q.dissent);
+Q.ko_relation += 1;
+!}
+
+The party claims European integration as part of the left's governing inheritance.
+
+- @post_event: Continue.
+
+@kwasniewski_liberal_left_alliance
+title: Liberal-Left Alliance Signal
+subtitle: Helps TR residue; irritates Miller loyalists.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Kwasniewski: liberal-left alliance";
+Q.month_actions += 1;
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 8);
+Q.urban_professionals_left += 0.8 * (1 - Q.dissent);
+Q.lgbtq_left += 0.5 * (1 - Q.dissent);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 5);
+Q.media_reach = Math.min(10, Q.media_reach + 0.4);
+!}
+
+Kwasniewski makes the case that the post-Palikot and SLD worlds cannot afford separate graves.
+
+- @post_event: Continue.
+
+@marek_belka
+title: Marek Belka
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: belka_advisor = 1
+
+= Marek Belka
+
+Economist, former prime minister, and National Bank president in 2014. Belka gives credibility with fiscally cautious voters, at the cost of left-wing warmth.
+
+- @belka_macro_authority: Macroeconomic authority.
+- @belka_budget_credibility: Budget credibility.
+- @belka_centrist_reassurance: Centrist reassurance.
+- @root: Return to main.
+
+@belka_macro_authority
+title: Macroeconomic Authority
+subtitle: Urban professionals and governing credibility.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Belka: macro authority";
+Q.month_actions += 1;
+Q.urban_professionals_left += 1.0 * (1 - Q.dissent);
+Q.media_reach = Math.min(10, Q.media_reach + 0.5);
+Q.public_finance_pressure = Math.max(0, Q.public_finance_pressure - 0.4);
+Q.ko_relation += 2;
+Q.pps_up_tension = Math.min(150, Q.pps_up_tension + 5);
+!}
+
+The SLD sounds competent on money. Some labor-left figures hear austerity even when the word is not used.
+
+- @post_event: Continue.
+
+@belka_budget_credibility
+title: Budget Credibility
+subtitle: Lower finance pressure and improve older-voter trust.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Belka: budget credibility";
+Q.month_actions += 1;
+Q.public_finance_pressure = Math.max(0, Q.public_finance_pressure - 0.6);
+Q.age_50_65_left += 0.5 * (1 - Q.dissent);
+Q.age_65_plus_left += 0.5 * (1 - Q.dissent);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+Q.pps_up_tension = Math.min(150, Q.pps_up_tension + 4);
+!}
+
+The party can promise social policy without sounding fiscally improvised.
+
+- @post_event: Continue.
+
+@belka_centrist_reassurance
+title: Centrist Reassurance
+subtitle: PO-compatible credibility; weaker economic edge.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Belka: centrist reassurance";
+Q.month_actions += 1;
+Q.ko_relation += 3;
+Q.urban_professionals_left += 0.7 * (1 - Q.dissent);
+Q.urban_working_class_left = Math.max(0, Q.urban_working_class_left - 0.3);
+Q.pps_up_tension = Math.min(150, Q.pps_up_tension + 6);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 3);
+!}
+
+Belka narrows the perceived risk of SLD participation in government. That helps coalition math and blunts the party's anti-liberal contrast.
+
+- @post_event: Continue.
+
+@wlodzimierz_cimoszewicz
+title: Wlodzimierz Cimoszewicz
+new-page: true
+is-card: true
+card-image: img/portraits/placeholder.jpg
+tags: lewica_advisor
+view-if: cimoszewicz_advisor = 1
+
+= Wlodzimierz Cimoszewicz
+
+Former prime minister and foreign minister, independent enough to validate the left without looking like a factional subordinate.
+
+- @cimoszewicz_diplomatic_gravitas: Diplomatic gravitas.
+- @cimoszewicz_new_face: Endorse a new face.
+- @cimoszewicz_anti_pis_frame: Anti-PiS constitutional frame.
+- @root: Return to main.
+
+@cimoszewicz_diplomatic_gravitas
+title: Diplomatic Gravitas
+subtitle: Foreign-policy credibility.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Cimoszewicz: diplomatic gravitas";
+Q.month_actions += 1;
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.4);
+Q.us_alignment = Math.min(10, Q.us_alignment + 0.3);
+Q.ukrainian_alignment = Math.min(10, Q.ukrainian_alignment + 0.3);
+Q.urban_professionals_left += 0.7 * (1 - Q.dissent);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+The party sounds like it can read a foreign ministry brief, not just a poll memo.
+
+- @post_event: Continue.
+
+@cimoszewicz_new_face
+title: Endorse A New Face
+subtitle: One-time 2015 unity boost; weakens Miller's hold.
+choose-if: advisor_action_timer <= 0 and year >= 2015 and cimoszewicz_endorsement_used = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if year < 2015 : This endorsement matters in the 2015 unity campaign. ?][? if cimoszewicz_endorsement_used > 0 : Cimoszewicz has already used this endorsement. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Cimoszewicz: endorse new face";
+Q.month_actions += 1;
+Q.cimoszewicz_endorsement_used = 1;
+Q.nowacka_unity_mandate = Math.min(10, Q.nowacka_unity_mandate + 1.5);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.8);
+Q.under_30_left += 0.8 * (1 - Q.dissent);
+Q.women_under_50_left += 0.8 * (1 - Q.dissent);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.3);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 8);
+!}
+
+An elder statesman gives permission to put a fresher face in front of the coalition.
+
+- @post_event: Continue.
+
+@cimoszewicz_anti_pis_frame
+title: Anti-PiS Constitutional Frame
+subtitle: Improve KO relation and institutional credibility.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.advisor_last_action = "Cimoszewicz: anti-PiS frame";
+Q.month_actions += 1;
+Q.ko_relation += 2;
+Q.pis_relation -= 2;
+Q.constitutional_crisis_risk = Math.max(0, Q.constitutional_crisis_risk - 0.1);
+Q.urban_professionals_left += 0.6 * (1 - Q.dissent);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 4);
+!}
+
+SLD frames PiS as an institutional risk before that becomes the full opposition common sense of 2016-2017.
+
+- @post_event: Continue.

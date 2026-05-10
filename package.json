@@ -1,22 +1,22 @@
 {
-  "name": "social_democracy_alternate_history",
-  "version": "0.11.1",
-  "description": "Building the game:",
+  "name": "dynamic-lewica",
+  "version": "0.1.0",
+  "description": "A Dendry political simulation skeleton for SLD/Lewica, starting in 2014.",
   "main": "out/html/index.html",
   "scripts": {
     "dendrynexus": "dendrynexus"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/originn0/dynamic_social_democracy.git"
+    "url": "git+https://github.com/mwyrebkowski/dynamic-lewica.git"
   },
   "keywords": [],
-  "author": "Autumn Chen",
+  "author": "dynamic-lewica contributors",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/originn0/dynamic_social_democracy/issues"
+    "url": "https://github.com/mwyrebkowski/dynamic-lewica/issues"
   },
-  "homepage": "https://github.com/originn0/dynamic_social_democracy",
+  "homepage": "https://github.com/mwyrebkowski/dynamic-lewica",
   "dependencies": {
     "dendrynexus": "github:originn0/dendrynexus",
     "parliament-svg": "^3.0.0"

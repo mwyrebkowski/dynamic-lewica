@@ -1,0 +1,19 @@
+title: Lewica Faction Crisis
+
+@faction_split
+new-page: true
+on-arrival: faction_split_seen += 1
+
+= Faction Breakaway
+
+The tension inside **[+ pending_faction_split_name +]** has passed 100. At this point it is no longer ordinary dissent; it is an organizational break.
+
+The faction **[+ pending_faction_split_destination +]**. Its strength is removed from the SLD coalition, some voters move with it, and the party loses resources and brand coherence.
+
+Faction tension is now a 0-100 pressure scale. Below 70 it is manageable. Above 70 it creates ultimatums and leadership threats. Above 100 the faction leaves, creates its own political vehicle, or defects toward a rival bloc.
+
+- @acknowledge_split: Continue.
+
+@acknowledge_split
+on-arrival: pending_faction_split = ""; pending_faction_split_name = ""; pending_faction_split_destination = ""
+go-to: post_event

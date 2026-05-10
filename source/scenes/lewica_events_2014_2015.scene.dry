@@ -1,0 +1,1329 @@
+title: Lewica Events 2014-2015
+
+@opening_2014
+new-page: true
+on-arrival: opening_2014_seen = 1
+
+= January 2014: The Old Arrangement
+
+The year opens with the familiar map still intact: Donald Tusk leads the PO-PSL government, Jaroslaw Kaczynski leads the main opposition, and Leszek Miller keeps the SLD in the Sejm as an aging but still organized third force.
+
+The party can treat 2014 as another survival year, or start moving before the ground shifts under it.
+
+- @opening_hold_third_force: Hold the line as a disciplined third force.
+- @opening_early_renewal: Start renewal before the crisis forces it.
+- @opening_issue_campaign: Prepare an issue campaign against both PO and PiS.
+
+@opening_hold_third_force
+on-arrival: {!
+Q.resources = Math.min(10, Q.resources + 1);
+Q.party_resources = Q.resources;
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.3);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 2);
+Q.sld_modernizers_dissent = Math.min(10, Q.sld_modernizers_dissent + 0.3);
+!}
+
+Miller keeps the machine calm. It is not inspiring, but discipline buys time and money.
+
+- @post_event: Continue.
+
+@opening_early_renewal
+on-arrival: {!
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.4);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.5);
+Q.under_30_left += 0.7 * Q.party_efficiency;
+Q.unaffiliated_left += 0.5 * Q.party_efficiency;
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.4);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.2);
+!}
+
+The modernizers get room before they can be dismissed as panic after defeat.
+
+- @post_event: Continue.
+
+@opening_issue_campaign
+on-arrival: {!
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.3);
+Q.urban_working_class_left += 0.8 * Q.party_efficiency;
+Q.unaffiliated_left += 0.4 * Q.party_efficiency;
+Q.ko_relation = Math.max(-10, Q.ko_relation - 1);
+Q.pis_relation = Math.max(-10, Q.pis_relation - 1);
+Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.3);
+!}
+
+The SLD tries to make the year about wages, pensions, secularism, and public services before the PO-PiS duel absorbs the air.
+
+- @post_event: Continue.
+
+@maidan_2014
+new-page: true
+on-arrival: {!
+Q.maidan_2014_seen = 1;
+Q.russian_threat_level = Math.max(Q.russian_threat_level, 5);
+!}
+
+= February 2014: Maidan Reaches Warsaw
+
+The Euromaidan crisis stops being a foreign-news item. Radoslaw Sikorski is active in Kyiv, the government speaks the language of state responsibility, and every Polish party has to decide whether Ukraine is central to its message.
+
+- @maidan_state_line: Back the pro-Ukraine state line.
+- @maidan_domestic_focus: Keep the SLD focused on domestic economics.
+- @maidan_left_solidarity: Frame Ukraine as democratic and social solidarity.
+
+@maidan_state_line
+on-arrival: {!
+Q.ukrainian_alignment = Math.min(10, Q.ukrainian_alignment + 0.8);
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.2);
+Q.ko_relation += 1;
+Q.media_reach = Math.min(10, Q.media_reach + 0.2);
+Q.tr_residue_dissent = Math.min(10, Q.tr_residue_dissent + 0.2);
+!}
+
+The party sounds responsible and pro-Western, but it risks disappearing into the government's line.
+
+- @post_event: Continue.
+
+@maidan_domestic_focus
+on-arrival: {!
+Q.resources = Math.min(10, Q.resources + 1);
+Q.party_resources = Q.resources;
+Q.ukrainian_alignment = Math.max(0, Q.ukrainian_alignment - 0.2);
+Q.urban_working_class_left += 0.5 * Q.party_efficiency;
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.2);
+!}
+
+The SLD keeps talking about living standards. It avoids a policy trap, but looks smaller during a regional crisis.
+
+- @post_event: Continue.
+
+@maidan_left_solidarity
+on-arrival: {!
+Q.ukrainian_alignment = Math.min(10, Q.ukrainian_alignment + 0.5);
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.4);
+Q.unaffiliated_left += 0.5 * Q.party_efficiency;
+Q.under_30_left += 0.5 * Q.party_efficiency;
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.2);
+!}
+
+The party avoids both Kremlin nostalgia and empty Atlanticism, using the crisis to speak about democratic self-organization.
+
+- @post_event: Continue.
+
+@crimea_2014
+new-page: true
+on-arrival: {!
+Q.crimea_2014_seen = 1;
+Q.russian_threat_level = Math.max(Q.russian_threat_level, 6);
+!}
+
+= March 2014: Crimea Changes The Weather
+
+Russia's seizure of Crimea pushes security, energy, NATO, and the eastern border into the center of Polish politics. The old comfort of domestic managerial politics weakens.
+
+- @crimea_security_credibility: Emphasize NATO and eastern security credibility.
+- @crimea_energy_social: Tie security to energy bills and public resilience.
+- @crimea_caution: Warn against panic and military grandstanding.
+
+@crimea_security_credibility
+on-arrival: {!
+Q.us_alignment = Math.min(10, Q.us_alignment + 0.4);
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.2);
+Q.ukrainian_alignment = Math.min(10, Q.ukrainian_alignment + 0.4);
+Q.ko_relation += 1;
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.2);
+!}
+
+The SLD sounds like a party of state again, though not especially insurgent.
+
+- @post_event: Continue.
+
+@crimea_energy_social
+on-arrival: {!
+Q.russian_threat_level = Math.max(Q.russian_threat_level, 6);
+Q.cost_of_living_pressure = Math.max(0, Q.cost_of_living_pressure - 0.1);
+Q.urban_working_class_left += 0.7 * Q.party_efficiency;
+Q.rural_west_left += 0.4 * Q.party_efficiency;
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+The party links geopolitics to heating, industry, and public investment, making the security shock less abstract.
+
+- @post_event: Continue.
+
+@crimea_caution
+on-arrival: {!
+Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.3);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.2);
+Q.ukrainian_alignment = Math.max(0, Q.ukrainian_alignment - 0.2);
+Q.media_reach = Math.max(0, Q.media_reach - 0.1);
+Q.tr_residue_dissent = Math.min(10, Q.tr_residue_dissent + 0.3);
+!}
+
+The line reassures anti-war members, but it is easy for opponents to portray as hesitation.
+
+- @post_event: Continue.
+
+@eu_campaign_2014
+new-page: true
+on-arrival: eu_campaign_2014_seen = 1
+
+= April 2014: European Campaign
+
+The European Parliament campaign begins under the shadow of Ukraine. PO and PiS turn Europe into another domestic duel, while Janusz Korwin-Mikke's KNP starts finding a louder anti-system audience.
+
+- @eu_campaign_serious: Run a serious social-democratic European campaign.
+- @eu_campaign_antikorwin: Confront the libertarian-right breakthrough.
+- @eu_campaign_low_turnout_machine: Treat the election as a low-turnout machine test.
+
+@eu_campaign_serious
+on-arrival: {!
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.3);
+Q.left_campaign_bonus += 0.3 * Q.party_efficiency;
+Q.urban_professionals_left += 0.8 * Q.party_efficiency;
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
+Q.ko_relation += 1;
+!}
+
+The SLD borrows language from European social democracy and tries to look normal again.
+
+- @post_event: Continue.
+
+@eu_campaign_antikorwin
+on-arrival: {!
+Q.left_campaign_bonus += 0.2 * Q.party_efficiency;
+Q.under_30_konf -= 0.8;
+Q.unaffiliated_left += 0.5 * Q.party_efficiency;
+Q.mw_onr_mobilization = Math.max(0, Q.mw_onr_mobilization - 0.2);
+Q.media_reach = Math.min(10, Q.media_reach + 0.2);
+!}
+
+The party treats the new right-libertarian vote as a political warning rather than a joke.
+
+- @post_event: Continue.
+
+@eu_campaign_low_turnout_machine
+on-arrival: {!
+Q.left_campaign_bonus += 0.4 * Q.party_efficiency;
+Q.resources = Math.max(0, Q.resources - 1);
+Q.party_resources = Q.resources;
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.4);
+Q.left_regional_rebuild += 0.4;
+Q.sld_modernizers_dissent = Math.min(10, Q.sld_modernizers_dissent + 0.2);
+!}
+
+The machine can still deliver in low-turnout contests, but every tactical win delays the argument over renewal.
+
+- @post_event: Continue.
+
+@ep_2014
+new-page: true
+on-arrival: {!
+Q.ep_2014_seen = 1;
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+function poll(party) {
+    return Number(Q[party + "_poll"] || Q[party + "_votes"] || 0);
+}
+function round1(value) {
+    return Math.round(value * 10) / 10;
+}
+function normalize(scores) {
+    let total = 0;
+    for (const party in scores) total += Math.max(0, scores[party]);
+    const result = {};
+    for (const party in scores) result[party] = total > 0 ? round1(Math.max(0, scores[party]) / total * 100) : 0;
+    return result;
+}
+const scores = {
+    left: poll("left") * 1.08 + (Q.left_campaign_bonus || 0) * 0.25 + ((Q.media_reach || 4) - 4) * 0.15 + ((Q.sld_apparatus_strength || 0) - 5) * 0.08 - Math.max(0, (Q.left_dissent || 0) - 3) * 0.12,
+    ko: poll("ko") * 1.05 + ((Q.eu_institutional_alignment || 0) - 8) * 0.18,
+    pis: poll("pis") * 1.03 + ((Q.russian_threat_level || 0) - 4) * 0.1,
+    psl: poll("psl") * 0.85,
+    konf: poll("konf") * 1.2,
+    razem: 0,
+    other: poll("other") * 0.88
+};
+const result = normalize(scores);
+Q.ep_2014_left_result = result.left;
+Q.ep_2014_ko_result = result.ko;
+Q.ep_2014_pis_result = result.pis;
+Q.ep_2014_psl_result = result.psl;
+Q.ep_2014_konf_result = result.konf;
+Q.ep_2014_other_result = result.other + result.razem;
+Q.ep_2014_result = Q.ep_2014_left_result;
+Q.left_votes = Q.ep_2014_left_result;
+Q.left_poll = Q.left_votes;
+Q.left_brand_strength = clamp((Q.left_brand_strength || 0) + (Q.ep_2014_result >= 10 ? 0.4 : 0.1), 0, 10);
+Q.sld_modernizers_dissent = clamp((Q.sld_modernizers_dissent || 0) + (Q.ep_2014_result < 9 ? 0.5 : 0.1), 0, 10);
+Q.election_records.push({year: 2014, month: 5, type: "EP", left: Q.ep_2014_left_result, ko: Q.ep_2014_ko_result, pis: Q.ep_2014_pis_result, psl: Q.ep_2014_psl_result, konf: Q.ep_2014_konf_result, other: Q.ep_2014_other_result});
+!}
+
+= European Parliament Election, May 2014
+
+The European election converts low-turnout organization, media reach, and the current voter map into the first national result of the run.
+
+SLD: **[+ ep_2014_left_result +]%**  
+PO/KO: **[+ ep_2014_ko_result +]%**  
+PiS: **[+ ep_2014_pis_result +]%**  
+PSL: **[+ ep_2014_psl_result +]%**  
+KORWiN right: **[+ ep_2014_konf_result +]%**  
+Others: **[+ ep_2014_other_result +]%**
+
+[? if ep_2014_result < 10: The party survives the contest, but younger figures argue that survival is not renewal. ?][? if ep_2014_result >= 10: The result is better than expected and gives Miller's leadership some breathing room. ?]
+
+- @post_event: Continue.
+
+@tape_affair_2014
+new-page: true
+on-arrival: {!
+Q.tape_affair_2014_seen = 1;
+Q.populist_realignment_pressure = Math.min(10, Q.populist_realignment_pressure + 0.6);
+Q.ko_tusk_strength = Math.max(0, Q.ko_tusk_strength - 0.4);
+!}
+
+= June 2014: The Tape Affair
+
+The Wprost recordings tear through the governing camp. The Belka-Sienkiewicz conversation and the later ABW entry into the newsroom turn a scandal into a question about institutions, elites, and the state.
+
+- @tape_attack_elites: Attack PO as a self-protecting elite.
+- @tape_institutional_cleanup: Demand institutional cleanup and media freedom.
+- @tape_left_economics: Use the scandal to pivot back to economic insecurity.
+
+@tape_attack_elites
+on-arrival: {!
+Q.ko_relation = Math.max(-10, Q.ko_relation - 4);
+Q.urban_working_class_ko -= 0.8;
+Q.unaffiliated_ko -= 0.8;
+Q.unaffiliated_left += 0.6 * Q.party_efficiency;
+Q.populist_realignment_pressure = Math.min(10, Q.populist_realignment_pressure + 0.3);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+The attack lands, but it also feeds the broader anti-elite wave that PiS and Kukiz-style politics can use more easily.
+
+- @post_event: Continue.
+
+@tape_institutional_cleanup
+on-arrival: {!
+Q.ko_relation = Math.max(-10, Q.ko_relation - 1);
+Q.constitutional_crisis_risk = Math.max(0, Q.constitutional_crisis_risk - 0.1);
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.3);
+Q.urban_professionals_left += 0.6 * Q.party_efficiency;
+Q.media_reach = Math.min(10, Q.media_reach + 0.2);
+!}
+
+The party criticizes the government without copying anti-state rhetoric.
+
+- @post_event: Continue.
+
+@tape_left_economics
+on-arrival: {!
+Q.urban_working_class_left += 0.9 * Q.party_efficiency;
+Q.age_50_65_left += 0.5 * Q.party_efficiency;
+Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.2);
+Q.media_reach = Math.max(0, Q.media_reach - 0.1);
+Q.ko_relation = Math.max(-10, Q.ko_relation - 2);
+!}
+
+The SLD argues that restaurant cynicism matters because ordinary voters are still dealing with jobs, pensions, and services.
+
+- @post_event: Continue.
+
+@tape_aftershock_2014
+new-page: true
+on-arrival: tape_aftershock_2014_seen = 1
+
+= July 2014: Tusk Survives
+
+The government wins its confidence vote, PiS cannot convert the tape affair into a change of cabinet, and the scandal becomes a slow poison rather than an immediate collapse.
+
+- @aftershock_keep_pressure: Keep pressure on PO.
+- @aftershock_move_on: Move back to local and social campaigning.
+- @aftershock_anti_corruption: Build an anti-corruption reform package.
+
+@aftershock_keep_pressure
+on-arrival: {!
+Q.ko_relation = Math.max(-10, Q.ko_relation - 2);
+Q.left_campaign_bonus += 0.2 * Q.party_efficiency;
+Q.populist_realignment_pressure = Math.min(10, Q.populist_realignment_pressure + 0.2);
+Q.pis_kaczynski_strength = Math.min(10, Q.pis_kaczynski_strength + 0.2);
+!}
+
+The scandal remains useful, though the sharper anti-system energy does not naturally belong to the SLD.
+
+- @post_event: Continue.
+
+@aftershock_move_on
+on-arrival: {!
+Q.left_regional_rebuild += 0.5;
+Q.left_campaign_bonus += 0.15 * Q.party_efficiency;
+Q.urban_working_class_left += 0.5 * Q.party_efficiency;
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.2);
+!}
+
+The party decides that November's local election will matter more than another week of outrage.
+
+- @post_event: Continue.
+
+@aftershock_anti_corruption
+on-arrival: {!
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.3);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.3);
+Q.urban_professionals_left += 0.5 * Q.party_efficiency;
+Q.media_reach = Math.min(10, Q.media_reach + 0.2);
+Q.resources = Math.max(0, Q.resources - 1);
+Q.party_resources = Q.resources;
+!}
+
+It costs time and staff, but the SLD gets a cleaner institutional argument.
+
+- @post_event: Continue.
+
+@tusk_eu_2014
+new-page: true
+on-arrival: {!
+Q.tusk_eu_2014_seen = 1;
+Q.ko_tusk_strength = Math.max(0, Q.ko_tusk_strength - 0.7);
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.4);
+!}
+
+= August 2014: Tusk Goes To Europe
+
+Donald Tusk is chosen to lead the European Council. It is a major Polish success in Brussels and, at the same time, a succession shock for Platforma.
+
+- @tusk_respect_success: Respect the state success.
+- @tusk_escape_line: Say Tusk is escaping domestic accountability.
+- @tusk_left_opening: Treat the succession as an opening for the left.
+
+@tusk_respect_success
+on-arrival: {!
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.3);
+Q.ko_relation += 1;
+Q.urban_professionals_left += 0.3 * Q.party_efficiency;
+Q.media_reach = Math.min(10, Q.media_reach + 0.1);
+!}
+
+The SLD sounds statesmanlike, but it gives PO some of the prestige frame.
+
+- @post_event: Continue.
+
+@tusk_escape_line
+on-arrival: {!
+Q.ko_relation = Math.max(-10, Q.ko_relation - 3);
+Q.unaffiliated_left += 0.5 * Q.party_efficiency;
+Q.populist_realignment_pressure = Math.min(10, Q.populist_realignment_pressure + 0.2);
+Q.pis_kaczynski_strength = Math.min(10, Q.pis_kaczynski_strength + 0.1);
+!}
+
+The line is simple and media-friendly, but PiS can shout it louder.
+
+- @post_event: Continue.
+
+@tusk_left_opening
+on-arrival: {!
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.3);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.3);
+Q.urban_professionals_left += 0.5 * Q.party_efficiency;
+Q.urban_working_class_left += 0.4 * Q.party_efficiency;
+Q.ko_tusk_strength = Math.max(0, Q.ko_tusk_strength - 0.2);
+!}
+
+The party argues that without Tusk's personal dominance, the old PO-PiS rhythm can be broken.
+
+- @post_event: Continue.
+
+@kopacz_government_2014
+new-page: true
+on-arrival: {!
+Q.kopacz_government_2014_seen = 1;
+Q.prime_minister = "Ewa Kopacz";
+Q.ko_tusk_strength = Math.max(0, Q.ko_tusk_strength - 0.5);
+Q.ko_schetyna_residual_strength = Math.min(10, Q.ko_schetyna_residual_strength + 0.3);
+!}
+
+= September 2014: The Kopacz Government
+
+Ewa Kopacz takes over the PO-PSL government. The coalition is still in office, but the central figure who held Platforma together is no longer prime minister.
+
+- @kopacz_test_government: Test the new government immediately.
+- @kopacz_working_channel: Keep parliamentary channels open.
+- @kopacz_women_leadership: Use the transition to speak to women voters.
+
+@kopacz_test_government
+on-arrival: {!
+Q.ko_relation = Math.max(-10, Q.ko_relation - 2);
+Q.left_campaign_bonus += 0.2 * Q.party_efficiency;
+Q.media_reach = Math.min(10, Q.media_reach + 0.2);
+Q.urban_working_class_ko -= 0.5;
+!}
+
+The SLD treats Kopacz as a premier who has to earn authority, not inherit it.
+
+- @post_event: Continue.
+
+@kopacz_working_channel
+on-arrival: {!
+Q.ko_relation += 2;
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.2);
+Q.tr_residue_dissent = Math.min(10, Q.tr_residue_dissent + 0.2);
+Q.urban_professionals_left += 0.3 * Q.party_efficiency;
+!}
+
+The party keeps anti-PiS parliamentary options alive, even if it blurs opposition lines.
+
+- @post_event: Continue.
+
+@kopacz_women_leadership
+on-arrival: {!
+Q.women_under_50_left += 0.8 * Q.party_efficiency;
+Q.women_over_50_left += 0.5 * Q.party_efficiency;
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.2);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.2);
+!}
+
+The SLD does not attack Kopacz personally; it pivots to childcare, work, health care, and reproductive autonomy.
+
+- @post_event: Continue.
+
+@sikorski_politico_2014
+new-page: true
+on-arrival: sikorski_politico_2014_seen = 1
+
+= October 2014: Sikorski's Foreign-Policy Mess
+
+Radoslaw Sikorski's Politico remarks about Putin, Tusk, and Ukraine produce a communications crisis just as the new governing arrangement is trying to look steady.
+
+- @sikorski_state_credibility: Call for disciplined foreign policy.
+- @sikorski_attack_chaos: Attack PO's chaos.
+- @sikorski_avoid_trap: Avoid the story and keep local focus.
+
+@sikorski_state_credibility
+on-arrival: {!
+Q.ukrainian_alignment = Math.min(10, Q.ukrainian_alignment + 0.2);
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.2);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+Q.urban_professionals_left += 0.4 * Q.party_efficiency;
+!}
+
+The SLD looks serious without pretending the gaffe is the only thing in politics.
+
+- @post_event: Continue.
+
+@sikorski_attack_chaos
+on-arrival: {!
+Q.ko_relation = Math.max(-10, Q.ko_relation - 2);
+Q.media_reach = Math.min(10, Q.media_reach + 0.2);
+Q.unaffiliated_left += 0.4 * Q.party_efficiency;
+Q.pis_kaczynski_strength = Math.min(10, Q.pis_kaczynski_strength + 0.1);
+!}
+
+The attack hurts PO, but the main beneficiary of a security-chaos story may still be PiS.
+
+- @post_event: Continue.
+
+@sikorski_avoid_trap
+on-arrival: {!
+Q.left_regional_rebuild += 0.4;
+Q.left_campaign_bonus += 0.15 * Q.party_efficiency;
+Q.rural_west_left += 0.4 * Q.party_efficiency;
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.2);
+!}
+
+The party lets the foreign-policy elite argue while SLD county structures prepare for November.
+
+- @post_event: Continue.
+
+@local_2014
+new-page: true
+on-arrival: {!
+Q.local_2014_seen = 1;
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+function poll(party) {
+    return Number(Q[party + "_poll"] || Q[party + "_votes"] || 0);
+}
+function round1(value) {
+    return Math.round(value * 10) / 10;
+}
+function normalize(scores) {
+    let total = 0;
+    for (const party in scores) total += Math.max(0, scores[party]);
+    const result = {};
+    for (const party in scores) result[party] = total > 0 ? round1(Math.max(0, scores[party]) / total * 100) : 0;
+    return result;
+}
+const structure = Q.left_regional_rebuild || 0;
+const scores = {
+    left: poll("left") * 0.95 + structure * 0.7 + (Q.left_campaign_bonus || 0) * 0.15 + ((Q.sld_apparatus_strength || 0) - 5) * 0.14 - Math.max(0, (Q.left_dissent || 0) - 3) * 0.12,
+    ko: poll("ko") * 0.93,
+    pis: poll("pis") * 0.98 + ((Q.russian_threat_level || 0) - 4) * 0.05,
+    psl: poll("psl") * 1.55 + Math.max(0, Q.psl_relation || 0) * 0.03,
+    konf: poll("konf") * 0.45,
+    razem: 0,
+    other: poll("other") * 1.12
+};
+const result = normalize(scores);
+Q.local_2014_left_result = result.left;
+Q.local_2014_ko_result = result.ko;
+Q.local_2014_pis_result = result.pis;
+Q.local_2014_psl_result = result.psl;
+Q.local_2014_konf_result = result.konf;
+Q.local_2014_other_result = result.other + result.razem;
+Q.local_2014_result = Q.local_2014_left_result;
+Q.left_votes = Q.local_2014_left_result;
+Q.left_poll = Q.left_votes;
+Q.party_resources = clamp((Q.party_resources || 0) + 1 + (structure >= 2 ? 1 : 0), 0, 10);
+Q.resources = Q.party_resources;
+Q.left_brand_strength = clamp((Q.left_brand_strength || 0) + 0.2 + (structure >= 2 ? 0.2 : 0) + (Q.local_2014_result >= 9 ? 0.2 : 0), 0, 10);
+Q.sld_apparatus_dissent = clamp((Q.sld_apparatus_dissent || 0) - 0.3 + (Q.local_2014_result < 8 ? 0.3 : 0), 0, 10);
+Q.election_records.push({year: 2014, month: 11, type: "Local", left: Q.local_2014_left_result, ko: Q.local_2014_ko_result, pis: Q.local_2014_pis_result, psl: Q.local_2014_psl_result, konf: Q.local_2014_konf_result, other: Q.local_2014_other_result});
+!}
+
+= Local Elections, November 2014
+
+The local elections test whether the SLD still has a machine outside television politics. Regional rebuilding matters more here than national media.
+
+SLD local baseline: **[+ local_2014_left_result +]%**  
+PO/KO: **[+ local_2014_ko_result +]%**  
+PiS: **[+ local_2014_pis_result +]%**  
+PSL: **[+ local_2014_psl_result +]%**  
+KORWiN right: **[+ local_2014_konf_result +]%**  
+Others: **[+ local_2014_other_result +]%**
+
+[? if left_regional_rebuild >= 2: Months of regional rebuilding pay off. The organization is still old, but it exists. ?][? if left_regional_rebuild < 2: The party gets through the election mostly on the remnants of older structures. ?]
+
+- @post_event: Continue.
+
+@pkw_crisis_2014
+new-page: true
+on-arrival: {!
+Q.pkw_crisis_2014_seen = 1;
+Q.populist_realignment_pressure = Math.min(10, Q.populist_realignment_pressure + 0.5);
+Q.pis_kaczynski_strength = Math.min(10, Q.pis_kaczynski_strength + 0.2);
+!}
+
+= November 2014: PKW Crisis
+
+The local election count becomes a political event of its own. The IT failure, delayed results, high invalid-vote controversy, and PSL's strong sejmik result create a crisis of trust around the election administration.
+
+- @pkw_defend_process: Defend the process and criticize the failure.
+- @pkw_demand_audit: Demand transparency, preservation of ballots, and audits.
+- @pkw_join_fraud_rhetoric: Join the strongest fraud rhetoric.
+
+@pkw_defend_process
+on-arrival: {!
+Q.constitutional_crisis_risk = Math.max(0, Q.constitutional_crisis_risk - 0.1);
+Q.ko_relation += 1;
+Q.psl_relation += 1;
+Q.urban_professionals_left += 0.3 * Q.party_efficiency;
+Q.pis_relation = Math.max(-10, Q.pis_relation - 1);
+!}
+
+The party separates administrative failure from delegitimizing elections.
+
+- @post_event: Continue.
+
+@pkw_demand_audit
+on-arrival: {!
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.3);
+Q.constitutional_crisis_risk = Math.max(0, Q.constitutional_crisis_risk - 0.05);
+Q.media_reach = Math.min(10, Q.media_reach + 0.2);
+Q.ko_relation = Math.max(-10, Q.ko_relation - 1);
+Q.psl_relation = Math.max(-10, Q.psl_relation - 1);
+!}
+
+The SLD takes the middle path: hard scrutiny without burning down trust in elections.
+
+- @post_event: Continue.
+
+@pkw_join_fraud_rhetoric
+on-arrival: {!
+Q.populist_realignment_pressure = Math.min(10, Q.populist_realignment_pressure + 0.5);
+Q.pis_kaczynski_strength = Math.min(10, Q.pis_kaczynski_strength + 0.3);
+Q.media_reach = Math.min(10, Q.media_reach + 0.3);
+Q.constitutional_crisis_risk = Math.min(10, Q.constitutional_crisis_risk + 0.2);
+Q.ko_relation = Math.max(-10, Q.ko_relation - 2);
+Q.psl_relation = Math.max(-10, Q.psl_relation - 2);
+!}
+
+The rhetoric is loud and satisfying, but it strengthens the anti-institutional terrain where PiS is more credible.
+
+- @post_event: Continue.
+
+@sld_reckoning_2014
+new-page: true
+on-arrival: {!
+Q.sld_reckoning_2014_seen = 1;
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + (Q.local_2014_result < 9 ? 8 : 4));
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + (Q.local_2014_result < 9 ? 5 : 2));
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + (Q.local_2014_result < 9 ? 3 : 1));
+!}
+
+= December 2014: SLD Reckoning
+
+After the local elections, the argument comes home. Joanna Senyszyn and other critics push the logic of responsibility: whoever makes the decisions should answer for the results. Miller has not been overthrown, but the cost of central control is becoming visible.
+
+This is not a Gawkowski rebellion yet. Krzysztof Gawkowski is still secretary general, closer to the party apparatus than to an open insurgency.
+
+- @reckoning_close_ranks: Close ranks around Miller.
+- @reckoning_open_review: Open a real review of the campaign.
+- @reckoning_public_critique: Let public critics speak.
+
+@reckoning_close_ranks
+on-arrival: {!
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.4);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 4);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 7);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 5);
+!}
+
+Miller wins the room, but every forced show of unity stores up resentment.
+
+- @post_event: Continue.
+
+@reckoning_open_review
+on-arrival: {!
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 2);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 4);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.3);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 2);
+!}
+
+The review weakens the aura of command, but it gives dissatisfied members a lawful channel.
+
+- @post_event: Continue.
+
+@reckoning_public_critique
+on-arrival: {!
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 5);
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 3);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 5);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.2);
+Q.media_reach = Math.min(10, Q.media_reach + 0.2);
+!}
+
+The party looks less sealed, but the apparatus hears indiscipline.
+
+- @post_event: Continue.
+
+@matyjaszczyk_reform_2014
+new-page: true
+on-arrival: matyjaszczyk_reform_2014_seen = 1
+
+= December 2014: Split The Offices?
+
+Krzysztof Matyjaszczyk's idea to separate the party leadership from the parliamentary club leadership offers a technical way to reduce Miller's concentration of power without declaring a direct revolt.
+
+- @matyjaszczyk_reject: Reject the proposal.
+- @matyjaszczyk_study: Send it to a rules review.
+- @matyjaszczyk_accept: Accept the separation as reform.
+
+@matyjaszczyk_reject
+on-arrival: {!
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.2);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 2);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 5);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 4);
+!}
+
+The old chain of command holds, but the reformers learn that only open pressure moves anything.
+
+- @post_event: Continue.
+
+@matyjaszczyk_study
+on-arrival: {!
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 2);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 2);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.2);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 1);
+!}
+
+The proposal is contained, but not buried. Everyone can claim partial victory.
+
+- @post_event: Continue.
+
+@matyjaszczyk_accept
+on-arrival: {!
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 8);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 4);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.5);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 5);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+It is a real institutional concession. Miller remains leader, but he no longer owns every lever at once.
+
+- @post_event: Continue.
+
+@presidential_candidate_2015
+new-page: true
+on-arrival: presidential_candidate_chosen = 1
+
+= January 2015: Presidential Candidate
+
+Komorowski looks safe, PO acts as if history is already written, and PiS is preparing Andrzej Duda. The SLD needs a candidate, but every serious figure knows the race can damage them.
+
+- @ogorek_candidate: Nominate Magdalena Ogorek, a media-facing outsider.
+- @elder_candidate: Try to draft an elder statesman.
+- @left_candidate: Run a clearly left-wing candidate.
+
+@ogorek_candidate
+on-arrival: {!
+Q.presidential_candidate = "Ogorek";
+Q.media_reach = Math.min(10, Q.media_reach + 0.5);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 2);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 6);
+Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 5);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 5);
+!}
+
+The campaign chooses novelty and television attention over ideological clarity. The way the decision is made also reinforces the charge that Miller decides first and asks the party later.
+
+- @post_event: Continue.
+
+@elder_candidate
+on-arrival: {!
+Q.presidential_candidate = "Elder statesman";
+Q.party_resources = Math.max(0, Q.party_resources - 1);
+Q.resources = Q.party_resources;
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.3);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 3);
+Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 2);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 1);
+!}
+
+The party tries to look serious and institutional, even if the candidate is not a long-term answer.
+
+- @post_event: Continue.
+
+@left_candidate
+on-arrival: {!
+Q.presidential_candidate = "Left-wing candidate";
+Q.urban_working_class_left += 0.8 * Q.party_efficiency;
+Q.unaffiliated_left += 0.8 * Q.party_efficiency;
+Q.pps_up_tension = Math.max(0, Q.pps_up_tension - 4);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 5);
+Q.media_reach = Math.max(0, Q.media_reach - 0.2);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.2);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 2);
+!}
+
+The result may be small, but the message is at least recognizably left.
+
+- @post_event: Continue.
+
+@terrain_no_confidence_2015
+new-page: true
+on-arrival: {!
+Q.terrain_no_confidence_2015_seen = 1;
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + (Q.presidential_candidate == "Ogorek" ? 5 : 2));
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + (Q.presidential_candidate == "Ogorek" ? 5 : 2));
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + (Q.presidential_candidate == "Ogorek" ? 8 : 3));
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.3);
+Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + (Q.presidential_candidate == "Ogorek" ? 3 : 1));
+!}
+
+= February 2015: Terrain Revolt
+
+[? if presidential_candidate = "Ogorek": The Ogorek nomination gives local structures a clean grievance: the presidential campaign was handed down from above. ?][? if presidential_candidate != "Ogorek": Even without the Ogorek trigger, local structures are tired of weak results and central control. ?] Some circles discuss no-confidence motions against Miller. Napieralski's camp sees opportunity, Czarzasty is watched as a possible operator, and Gawkowski remains the secretary general expected to keep the party functional.
+
+- @terrain_gawkowski_discipline: Have Gawkowski enforce discipline.
+- @terrain_gawkowski_mediation: Use Gawkowski as a mediator.
+- @terrain_leadership_challenge: Let the challenge become explicit.
+
+@terrain_gawkowski_discipline
+on-arrival: {!
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 3);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 6);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 6);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.2);
+!}
+
+Gawkowski is not a rebel here. He functions as the apparatus man who can count branches and lower the temperature, at the price of deeper resentment.
+
+- @post_event: Continue.
+
+@terrain_gawkowski_mediation
+on-arrival: {!
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.6);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 4);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 2);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 2);
+Q.resources = Math.max(0, Q.resources - 1);
+Q.party_resources = Q.resources;
+!}
+
+The secretary general absorbs anger through meetings, concessions, and procedural promises. It costs time and money, but the revolt becomes less binary.
+
+- @post_event: Continue.
+
+@terrain_leadership_challenge
+on-arrival: {!
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 1.0);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 8);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 8);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 4);
+Q.tr_residue_tension = Math.max(0, Q.tr_residue_tension - 1);
+!}
+
+This is the alternate-history path: Gawkowski breaks earlier than he did historically. The party gains a succession argument, but risks paralysis before the presidential race.
+
+- @post_event: Continue.
+
+@presidential_2015
+new-page: true
+on-arrival: {!
+Q.presidential_2015_seen = 1;
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+function poll(party) {
+    return Number(Q[party + "_poll"] || Q[party + "_votes"] || 0);
+}
+function round1(value) {
+    return Math.round(value * 10) / 10;
+}
+function normalize(scores) {
+    let total = 0;
+    for (const party in scores) total += Math.max(0, scores[party]);
+    const result = {};
+    for (const party in scores) result[party] = total > 0 ? round1(Math.max(0, scores[party]) / total * 100) : 0;
+    return result;
+}
+let leftCandidate = poll("left") * 0.28 + (Q.left_campaign_bonus || 0) * 0.08 + ((Q.media_reach || 4) - 4) * 0.05 - Math.max(0, (Q.left_dissent || 0) - 3) * 0.08;
+if (Q.presidential_candidate == "Elder statesman") leftCandidate = poll("left") * 0.42 + (Q.left_brand_strength || 0) * 0.16 + (Q.left_campaign_bonus || 0) * 0.1 - Math.max(0, (Q.left_dissent || 0) - 3) * 0.07;
+if (Q.presidential_candidate == "Left-wing candidate") leftCandidate = poll("left") * 0.38 + (Q.unaffiliated_left || 0) * 0.03 + (Q.under_30_left || 0) * 0.025 + (Q.left_campaign_bonus || 0) * 0.16 - Math.max(0, (Q.left_dissent || 0) - 3) * 0.06;
+if (Q.presidential_candidate == "Ogorek") leftCandidate = poll("left") * 0.24 + Math.max(0, (Q.media_reach || 4) - 4) * 0.1 + (Q.left_campaign_bonus || 0) * 0.05 - Math.max(0, (Q.left_dissent || 0) - 3) * 0.1;
+const scores = {
+    left: clamp(leftCandidate, 1.2, 7.5),
+    duda: 34.8 + (poll("pis") - 33.5) * 0.35 + ((Q.pis_kaczynski_strength || 0) - 8) * 0.2 + ((Q.russian_threat_level || 0) - 4) * 0.12,
+    komorowski: 33.8 + (poll("ko") - 34) * 0.35 + ((Q.ko_tusk_strength || 0) - 7) * 0.15 - Math.max(0, (Q.populist_realignment_pressure || 0) - 3) * 0.25,
+    kukiz: 20.8 + (poll("other") - 11) * 0.28 + ((Q.populist_realignment_pressure || 0) - 3) * 0.45,
+    psl: 1.6 + (poll("psl") - 7) * 0.12,
+    korwin: 3.3 + (poll("konf") - 5) * 0.35,
+    other: 3.3
+};
+const result = normalize(scores);
+Q.presidential_2015_result = result.left;
+Q.presidential_2015_duda_result = result.duda;
+Q.presidential_2015_komorowski_result = result.komorowski;
+Q.presidential_2015_kukiz_result = result.kukiz;
+Q.presidential_2015_psl_result = result.psl;
+Q.presidential_2015_korwin_result = result.korwin;
+Q.presidential_2015_other_result = result.other;
+Q.presidential_2015_duda_second = round1(clamp(50.4 + (Q.presidential_2015_duda_result - Q.presidential_2015_komorowski_result) * 0.32 + (Q.presidential_2015_korwin_result - 3.3) * 0.12 + (Q.presidential_2015_kukiz_result - 20.8) * 0.05 - Math.max(0, Q.ko_relation || 0) * 0.015, 46, 54));
+Q.presidential_2015_komorowski_second = round1(100 - Q.presidential_2015_duda_second);
+Q.presidential_2015_duda_win = Q.presidential_2015_duda_second >= 50 ? 1 : 0;
+Q.president = Q.presidential_2015_duda_win ? "Andrzej Duda" : "Bronislaw Komorowski";
+Q.left_brand_strength = clamp((Q.left_brand_strength || 0) - (Q.presidential_2015_result < 3 ? 0.7 : 0.3) + (Q.presidential_2015_result >= 4 ? 0.2 : 0), 0, 10);
+Q.sld_modernizers_tension = clamp((Q.sld_modernizers_tension || 0) + (Q.presidential_2015_result < 3 ? 8 : 4), 0, 150);
+Q.tr_residue_tension = clamp((Q.tr_residue_tension || 0) + 4, 0, 150);
+Q.gawkowski_network_tension = clamp((Q.gawkowski_network_tension || 0) + (Q.presidential_2015_result < 3 ? 8 : 3), 0, 150);
+Q.sld_apparatus_tension = clamp((Q.sld_apparatus_tension || 0) + (Q.presidential_2015_result < 3 ? 3 : 1), 0, 150);
+Q.pis_kaczynski_strength = clamp((Q.pis_kaczynski_strength || 0) + (Q.presidential_2015_duda_win ? 0.5 : -0.3), 0, 10);
+Q.ko_tusk_strength = clamp((Q.ko_tusk_strength || 0) + (Q.presidential_2015_duda_win ? -0.5 : 0.2), 0, 10);
+Q.election_records.push({year: 2015, month: 5, type: "Presidential", left: Q.presidential_2015_result, duda: Q.presidential_2015_duda_result, komorowski: Q.presidential_2015_komorowski_result, kukiz: Q.presidential_2015_kukiz_result, second_round_duda: Q.presidential_2015_duda_second});
+!}
+
+= Presidential Election, May 2015
+
+The presidential election resolves from the candidate choice, the current party map, and the wider anti-establishment mood.
+
+SLD first round: **[+ presidential_2015_result +]%**  
+Andrzej Duda: **[+ presidential_2015_duda_result +]%**  
+Bronislaw Komorowski: **[+ presidential_2015_komorowski_result +]%**  
+Pawel Kukiz: **[+ presidential_2015_kukiz_result +]%**  
+PSL candidate: **[+ presidential_2015_psl_result +]%**  
+KORWiN right: **[+ presidential_2015_korwin_result +]%**  
+Others: **[+ presidential_2015_other_result +]%**
+
+Second round: [? if presidential_2015_duda_win: Andrzej Duda wins with **[+ presidential_2015_duda_second +]%** against Bronislaw Komorowski's **[+ presidential_2015_komorowski_second +]%**. The PO aura of inevitability breaks, and PiS can now imagine full power.?][? if not presidential_2015_duda_win: Bronislaw Komorowski survives with **[+ presidential_2015_komorowski_second +]%** against Andrzej Duda's **[+ presidential_2015_duda_second +]%**. PiS is denied the presidency, but the anti-establishment wave is still visible.?]
+
+[? if presidential_2015_result < 3: The campaign is a humiliation. The party looks both old and unserious, which is the worst possible combination. ?][? if presidential_2015_result >= 3: The campaign is still weak, but it avoids total disgrace and gives the party a clearer line for autumn. ?]
+
+- @post_event: Continue.
+
+@ogorek_reckoning_2015
+new-page: true
+on-arrival: ogorek_reckoning_2015_seen = 1
+
+= June 2015: The Presidential Reckoning
+
+The presidential result forces another round of blame. Leszek Aleksandrzak and the campaign team are obvious targets, but the deeper argument is about Miller's method: narrow decisions, weak consultation, and a party that cannot decide whether it wants renewal or control.
+
+- @reckoning_sacrifice_staff: Sacrifice the campaign staff.
+- @reckoning_defend_miller: Defend Miller and move to autumn.
+- @reckoning_full_review: Open a full leadership review.
+
+@reckoning_sacrifice_staff
+on-arrival: {!
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 2);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 3);
+Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 2);
+Q.left_campaign_bonus += 0.1 * Q.party_efficiency;
+!}
+
+The staff change gives members a visible consequence, but it does not answer who chose the strategy.
+
+- @post_event: Continue.
+
+@reckoning_defend_miller
+on-arrival: {!
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 3);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 6);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 5);
+!}
+
+The leadership says autumn is all that matters now. The party obeys, but the bill is deferred.
+
+- @post_event: Continue.
+
+@reckoning_full_review
+on-arrival: {!
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 5);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 4);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.5);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 3);
+!}
+
+The review signals that the party can correct itself, but it weakens the old hierarchy during an election year.
+
+- @post_event: Continue.
+
+@sejm_strategy_2015
+new-page: true
+on-arrival: sejm_strategy_chosen = 1
+
+= Sejm List Strategy, 2015
+
+The autumn election is now existential. The left can run as a broad coalition and face an 8 percent threshold, or run SLD alone and accept a lower ceiling but a safer 5 percent threshold.
+
+Razem is forming outside the old structures. It can be ignored, attacked, or treated as a warning.
+
+- @united_left_strategy: Build the United Left coalition.
+- @sld_alone_strategy: Run as SLD alone.
+- @broad_left_strategy: Attempt a harder broad-left list with stronger programmatic concessions.
+
+@united_left_strategy
+on-arrival: {!
+Q.sejm_list_strategy = "United Left";
+Q.left_name = "United Left";
+Q.threshold_type = "coalition";
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.4);
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.4);
+Q.sld_modernizers_dissent = Math.max(0, Q.sld_modernizers_dissent - 0.2);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.2);
+Q.razem_external = 1;
+!}
+
+The coalition looks broader, but the 8 percent threshold turns unity into a cliff edge.
+
+- @post_event: Continue.
+
+@sld_alone_strategy
+on-arrival: {!
+Q.sejm_list_strategy = "SLD alone";
+Q.left_name = "SLD";
+Q.threshold_type = "party";
+Q.left_brand_strength = Math.max(0, Q.left_brand_strength - 0.2);
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.2);
+Q.sld_modernizers_dissent = Math.min(10, Q.sld_modernizers_dissent + 0.8);
+Q.tr_residue_dissent = Math.min(10, Q.tr_residue_dissent + 0.8);
+Q.razem_external = 1;
+!}
+
+The safer threshold may save representation, but it signals that the old party has not solved the broader left's crisis.
+
+- @post_event: Continue.
+
+@broad_left_strategy
+on-arrival: {!
+Q.sejm_list_strategy = "Broad Left";
+Q.left_name = "Broad Left";
+Q.threshold_type = "coalition";
+Q.party_resources = Math.max(0, Q.party_resources - 1);
+Q.resources = Q.party_resources;
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.8);
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.6);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.7);
+Q.sld_modernizers_dissent = Math.max(0, Q.sld_modernizers_dissent - 0.5);
+Q.tr_residue_dissent = Math.max(0, Q.tr_residue_dissent - 0.5);
+Q.razem_external = 1;
+!}
+
+The list is more credible to activists, but it costs scarce resources and unsettles the apparatus.
+
+- @post_event: Continue.
+
+@sejm_2015
+new-page: true
+on-arrival: {!
+Q.sejm_2015_seen = 1;
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+function poll(party) {
+    return Number(Q[party + "_poll"] || Q[party + "_votes"] || 0);
+}
+function round1(value) {
+    return Math.round(value * 10) / 10;
+}
+function completeResult(scores) {
+    const result = {};
+    let subtotal = 0;
+    for (const party of ["left", "razem", "pis", "ko", "psl", "konf"]) {
+        result[party] = Math.max(0, Number(scores[party] || 0));
+        subtotal += result[party];
+    }
+    if (subtotal > 98) {
+        const scale = 98 / subtotal;
+        subtotal = 0;
+        for (const party of ["left", "razem", "pis", "ko", "psl", "konf"]) {
+            result[party] = result[party] * scale;
+            subtotal += result[party];
+        }
+    }
+    result.other = Math.max(2, 100 - subtotal);
+    for (const party of ["left", "razem", "pis", "ko", "psl", "konf", "other"]) result[party] = round1(result[party]);
+    const roundedSubtotal = result.left + result.razem + result.pis + result.ko + result.psl + result.konf;
+    result.other = round1(Math.max(0, 100 - roundedSubtotal));
+    return result;
+}
+function seatsFor(votes, threshold, qualifyingTotal) {
+    if (votes < threshold || qualifyingTotal <= 0) return 0;
+    return Math.max(1, Math.round(votes / qualifyingTotal * 460));
+}
+let leftScore = 0;
+let razemScore = 0;
+const dissentPenalty = Math.max(0, (Q.left_dissent || 0) - 3);
+if (Q.sejm_list_strategy == "United Left") {
+    leftScore = poll("left") * 0.82 + 0.75 + (Q.left_campaign_bonus || 0) * 0.5 + ((Q.left_brand_strength || 4) - 4) * 0.22 - dissentPenalty * 0.16;
+    razemScore = 3.45 + Math.max(0, 5 - (Q.left_brand_strength || 0)) * 0.12 + Math.max(0, (Q.sld_modernizers_dissent || 0) - 4) * 0.12;
+} else if (Q.sejm_list_strategy == "SLD alone") {
+    leftScore = poll("left") * 0.66 + 0.25 + (Q.left_campaign_bonus || 0) * 0.42 + ((Q.left_brand_strength || 4) - 4) * 0.12 - dissentPenalty * 0.14;
+    razemScore = 3.75 + Math.max(0, (Q.sld_modernizers_dissent || 0) - 4) * 0.18 + Math.max(0, 4 - (Q.left_brand_strength || 0)) * 0.1;
+} else {
+    leftScore = poll("left") * 0.78 + 1.05 + (Q.left_campaign_bonus || 0) * 0.58 + ((Q.civil_society_capital || 3) - 3) * 0.22 + ((Q.left_brand_strength || 4) - 4) * 0.24 + Math.max(0, Q.razem_relation || 0) * 0.06 - dissentPenalty * 0.18;
+    razemScore = 2.4 + Math.max(0, (Q.sld_apparatus_dissent || 0) - 3) * 0.1 + Math.max(0, -(Q.razem_relation || 0)) * 0.07;
+}
+leftScore = clamp(leftScore, 3.5, 14);
+razemScore = clamp(razemScore, 1.5, 6.5);
+const scores = {
+    left: leftScore,
+    razem: razemScore,
+    pis: poll("pis") * 1.0 + (Q.presidential_2015_duda_win ? 2.2 : -1.2) + ((Q.pis_kaczynski_strength || 8) - 8) * 0.22 + ((Q.populist_realignment_pressure || 3) - 3) * 0.3,
+    ko: poll("ko") * 0.78 + (Q.presidential_2015_duda_win ? -0.9 : 1.0) + Math.max(0, Q.ko_relation || 0) * 0.015,
+    psl: poll("psl") * 0.7 + 0.2 + Math.max(0, Q.psl_relation || 0) * 0.02,
+    konf: poll("konf") * 0.9 + Math.max(0, (Q.konf_mentzen_strength || 0) - 1) * 0.1,
+    other: 0
+};
+const result = completeResult(scores);
+Q.left_votes = result.left;
+Q.left_poll = result.left;
+Q.razem_votes = result.razem;
+Q.pis_votes = result.pis;
+Q.ko_votes = result.ko;
+Q.psl_votes = result.psl;
+Q.konf_votes = result.konf;
+Q.other_votes = result.other;
+Q.sejm_2015_left_result = Q.left_votes;
+Q.sejm_2015_razem_result = Q.razem_votes;
+Q.sejm_2015_pis_result = Q.pis_votes;
+Q.sejm_2015_ko_result = Q.ko_votes;
+Q.sejm_2015_psl_result = Q.psl_votes;
+Q.sejm_2015_konf_result = Q.konf_votes;
+Q.sejm_2015_other_result = Q.other_votes;
+Q.left_threshold_safety = round1(result.left - (Q.threshold_type == "coalition" ? 8 : 5));
+Q.razem_state_funding = Q.razem_votes >= 3 ? 1 : 0;
+const threshold = Q.threshold_type == "coalition" ? 8 : 5;
+const leftQualified = Q.left_votes >= threshold;
+let qualifyingTotal = 0;
+if (leftQualified) qualifyingTotal += Q.left_votes;
+if (Q.razem_votes >= 5) qualifyingTotal += Q.razem_votes;
+if (Q.pis_votes >= 5) qualifyingTotal += Q.pis_votes;
+if (Q.ko_votes >= 5) qualifyingTotal += Q.ko_votes;
+if (Q.psl_votes >= 5) qualifyingTotal += Q.psl_votes;
+if (Q.konf_votes >= 5) qualifyingTotal += Q.konf_votes;
+if (Q.other_votes >= 5) qualifyingTotal += Q.other_votes;
+Q.left_seats = seatsFor(Q.left_votes, threshold, qualifyingTotal);
+Q.razem_seats = seatsFor(Q.razem_votes, 5, qualifyingTotal);
+Q.pis_seats = seatsFor(Q.pis_votes, 5, qualifyingTotal);
+Q.ko_seats = seatsFor(Q.ko_votes, 5, qualifyingTotal);
+Q.psl_seats = seatsFor(Q.psl_votes, 5, qualifyingTotal);
+Q.konf_seats = seatsFor(Q.konf_votes, 5, qualifyingTotal);
+Q.other_seats = seatsFor(Q.other_votes, 5, qualifyingTotal);
+let seatTotal = Q.left_seats + Q.razem_seats + Q.pis_seats + Q.ko_seats + Q.psl_seats + Q.konf_seats + Q.other_seats;
+let largestParty = "pis";
+let largestVotes = Q.pis_votes;
+for (const party of ["left", "razem", "ko", "psl", "konf", "other"]) {
+    if (Q[party + "_votes"] > largestVotes && Q[party + "_seats"] > 0) {
+        largestParty = party;
+        largestVotes = Q[party + "_votes"];
+    }
+}
+if (seatTotal != 460 && Q[largestParty + "_seats"] > 0) Q[largestParty + "_seats"] += 460 - seatTotal;
+if (Q.left_votes < threshold) {
+    Q.left_in_sejm = 0;
+    Q.left_seats = 0;
+    Q.game_over = 1;
+} else {
+    Q.left_in_sejm = 1;
+    Q.party_resources = clamp((Q.party_resources || 0) + 2, 0, 10);
+    Q.resources = Q.party_resources;
+}
+Q.election_records.push({year: 2015, month: 10, type: "Sejm", left: Q.left_votes, razem: Q.razem_votes, pis: Q.pis_votes, ko: Q.ko_votes, psl: Q.psl_votes, konf: Q.konf_votes, other: Q.other_votes, seats: Q.left_seats});
+!}
+
+= Sejm Election, October 2015
+
+The autumn election converts every strategic choice into arithmetic.
+
+[+ left_name +]: **[+ sejm_2015_left_result +]%** ([+ left_seats +] seats)  
+Razem: **[+ sejm_2015_razem_result +]%** ([+ razem_seats +] seats)  
+PiS: **[+ sejm_2015_pis_result +]%** ([+ pis_seats +] seats)  
+PO/KO: **[+ sejm_2015_ko_result +]%** ([+ ko_seats +] seats)  
+PSL: **[+ sejm_2015_psl_result +]%** ([+ psl_seats +] seats)  
+KORWiN right: **[+ sejm_2015_konf_result +]%** ([+ konf_seats +] seats)  
+Others: **[+ sejm_2015_other_result +]%** ([+ other_seats +] seats)  
+Threshold: [? if threshold_type = "coalition": 8% coalition threshold?][? if threshold_type != "coalition": 5% party threshold?]
+
+- @post_event: Continue.
+
+@post_sejm_miller_challenge_2015
+new-page: true
+on-arrival: {!
+Q.post_sejm_miller_challenge_seen = 1;
+const defeatShock = Q.game_over ? 12 : 6;
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + defeatShock);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + Math.round(defeatShock * 0.8));
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + defeatShock);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + (Q.game_over ? 0.8 : 0.4));
+Q.tr_residue_tension = Math.min(150, Q.tr_residue_tension + 3);
+!}
+
+= November 2015: "Miller's Time Has Passed"
+
+[? if game_over: The threshold disaster turns a slow revolt into an open succession fight. ?][? if not game_over: The left survives, but the campaign still proves that Miller's authority is no longer enough to organize the future. ?] Dariusz Jonski, Krzysztof Gawkowski, and Marek Balt become the younger public faces saying that the Miller era is over.
+
+This is the real Gawkowski-against-Miller moment: late 2015, after the accumulated defeats, not a clean 2014 rebellion.
+
+- @postsejm_young_break: Let the younger figures break publicly.
+- @postsejm_elect_gawkowski: Elect Krzysztof Gawkowski as SLD chair.
+- @postsejm_managed_exit: Manage Miller's exit through the apparatus.
+- @postsejm_miller_resists: Let Miller resist until a formal congress.
+
+@postsejm_young_break
+on-arrival: {!
+Q.party_leader = "Leszek Miller (contested)";
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.7);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 6);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 5);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 6);
+!}
+
+The break is clear and cathartic. It also confirms to many organizers that the party is now fighting itself in public.
+
+- @post_event: Continue.
+
+@postsejm_elect_gawkowski
+choose-if: gawkowski_network_strength >= 2.5 and not gawkowski_network_split
+unavailable-subtitle: Gawkowski needs a stronger internal network before he can win the chair.
+on-arrival: {!
+Q.party_leader = "Krzysztof Gawkowski";
+Q.gawkowski_chair = 1;
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 1.0);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 20);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 15);
+Q.sld_apparatus_tension = Math.min(150, Q.sld_apparatus_tension + 20);
+Q.sld_apparatus_strength = Math.max(0, Q.sld_apparatus_strength - 0.4);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.5);
+Q.media_reach = Math.min(10, Q.media_reach + 0.3);
+Q.under_30_left += 0.6 * Q.party_efficiency;
+Q.urban_professionals_left += 0.4 * Q.party_efficiency;
+!}
+
+Gawkowski turns the secretary-general network into a leadership majority. The party gets a generational signal, but veteran organizers treat the result as a hostile takeover of the old machine.
+
+- @post_event: Continue.
+
+@postsejm_managed_exit
+on-arrival: {!
+Q.party_leader = "Transition committee";
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.5);
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 5);
+Q.gawkowski_network_strength = Math.min(10, Q.gawkowski_network_strength + 0.3);
+Q.gawkowski_network_tension = Math.max(0, Q.gawkowski_network_tension - 2);
+Q.sld_modernizers_tension = Math.max(0, Q.sld_modernizers_tension - 2);
+!}
+
+The party avoids a spectacle and lets the apparatus negotiate the next balance of power. It is orderly, but not especially democratic.
+
+- @post_event: Continue.
+
+@postsejm_miller_resists
+on-arrival: {!
+Q.party_leader = "Leszek Miller";
+Q.sld_apparatus_tension = Math.max(0, Q.sld_apparatus_tension - 2);
+Q.sld_modernizers_tension = Math.min(150, Q.sld_modernizers_tension + 7);
+Q.gawkowski_network_tension = Math.min(150, Q.gawkowski_network_tension + 8);
+!}
+
+The old leader can still slow the succession. He cannot restore the pre-crisis authority.
+
+- @post_event: Continue.
+
+@sejm_survival
+new-page: true
+view-if: game_over = 0
+
+= The Left Survives
+
+[+ left_name +] clears the threshold and remains in the Sejm with approximately **[+ left_seats +] seats**.
+
+The party has not solved its identity crisis, but it has avoided the civilizational defeat of total parliamentary absence. The next phase would be the 2016-2019 road to consolidation.
+
+- @post_event: Continue to the slice endpoint.
+
+@threshold_failure
+new-page: true
+view-if: game_over = 1
+game-over: false
+on-arrival: threshold_failure_seen = 1
+
+= Threshold Failure
+
+The left falls below the threshold. For the first time after 1989, no institutional left party enters the Sejm.
+
+[+ left_name +]: **[+ left_votes +]%**  
+Razem: **[+ razem_votes +]%** [? if razem_state_funding: - enough for state funding, not enough for seats?]
+
+This is the 2015 catastrophe: organization survives on paper, but parliamentary politics moves on without it.
+
+Leader: [+ party_leader +]  
+Gawkowski network: strength [+ gawkowski_network_strength +], tension [+ gawkowski_network_tension +] / 100
+
+**Ending: Eliminated.**
+
+@skeleton_complete
+new-page: true
+game-over: false
+on-arrival: skeleton_complete_seen = 1
+
+= First Slice Complete
+
+The 2014-2015 skeleton is complete. The current build stops here by design: later-period content should not be coded until this slice is reviewed and tuned.
+
+Current position:
+
+Party: [+ left_name +]  
+Vote: [+ left_votes +]%  
+Seats: [+ left_seats +]  
+Party resources: [+ party_resources +]  
+Brand strength: [+ left_brand_strength +] / 10  
+Leader: [+ party_leader +]  
+Gawkowski network: strength [+ gawkowski_network_strength +], tension [+ gawkowski_network_tension +] / 100

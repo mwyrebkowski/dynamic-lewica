@@ -1,4 +1,6 @@
-# Social Democracy: An Alternate History
+# Dynamic Lewica: SLD 2014
+
+First playable skeleton for a Polish left political simulation adapted from the Dynamic Social Democracy codebase. The current playable identity is **SLD only**, with English UI text and a focused January 2014 to October/November 2015 loop.
 
 ## Included Libraries
 
@@ -10,8 +12,8 @@
 
 ## Building the game
 
-1. Install [dendrynexus](https://github.com/aucchen/dendrynexus)
+1. Run `npm install`.
 
-2. Run `dendrynexus make-html` in this folder.
+2. Run `npm run dendrynexus -- make-html --force` in this folder.
 
-To update dendrynexus in `package-lock.json`, run `npm install --upgrade https://github.com/aucchen/dendrynexus`
+3. Serve `out/html` with any local static server.

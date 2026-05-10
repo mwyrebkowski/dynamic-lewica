@@ -1,0 +1,1094 @@
+title: Lewica Party Affairs
+
+@campaigning
+title: Campaigning
+new-page: true
+is-card: true
+card-image: img/party_cards/campaigning.png
+tags: lewica_party_affairs
+frequency: 100
+max-visits: 36
+on-arrival: month_actions += 1
+
+= Campaigning
+
+Whether or not there is a formal campaign, the SLD is always trying to broaden its voter base. Who should receive the month's attention?
+
+- @campaign_urban_professionals: Urban professionals.
+- @campaign_urban_working_class: Urban working-class voters.
+- @campaign_unaffiliated_youth: Young secular and unaffiliated voters.
+- @campaign_women_under_50: Women under 50.
+- @campaign_rural_west: Rural and small-town western Poland.
+- @campaign_catholic_nonpracticing: Catholic but non-practicing voters.
+- @post_event: We either do not want to or cannot campaign right now.
+
+@campaign_urban_professionals
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+const eff = 1 - Q.dissent;
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.urban_professionals_left += 2.6 * eff;
+Q.unaffiliated_left += 0.8 * eff;
+Q.media_reach = Math.min(10, Q.media_reach + 0.4);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.2);
+Q.left_campaign_bonus += 0.25 * eff;
+Q.left_campaigns_urban_professionals += 1;
+!}
+
+The campaign buys targeted media and event work in Warsaw, Krakow, Wroclaw, Poznan, and Gdansk. This helps voters who are culturally liberal but instinctively prefer PO.
+
+- @post_event: Continue.
+
+@campaign_urban_working_class
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+const eff = 1 - Q.dissent;
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.urban_working_class_left += 3.0 * eff;
+Q.age_50_65_left += 0.8 * eff;
+Q.age_65_plus_left += 0.4 * eff;
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.4);
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.1);
+Q.left_campaign_bonus += 0.3 * eff;
+Q.left_campaigns_urban_working_class += 1;
+!}
+
+The message leans into wages, pensions, post-industrial cities, and the memory of a left that once spoke to workers rather than only to television studios.
+
+- @post_event: Continue.
+
+@campaign_unaffiliated_youth
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+const eff = 1 - Q.dissent;
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.under_30_left += 3.1 * eff;
+Q.unaffiliated_left += 2.0 * eff;
+Q.lgbtq_left += 1.0 * eff;
+Q.media_reach = Math.min(10, Q.media_reach + 0.5);
+Q.secularization_tide = Math.min(10, Q.secularization_tide + 0.2);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.3);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.4);
+Q.left_campaign_bonus += 0.35 * eff;
+Q.left_campaigns_unaffiliated_youth += 1;
+!}
+
+The party tests a sharper secular and generational message. It is the right language for younger non-practicing voters, but the apparatus worries about looking unserious.
+
+- @post_event: Continue.
+
+@campaign_women_under_50
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+const eff = 1 - Q.dissent;
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.women_under_50_left += 2.8 * eff;
+Q.under_30_left += 0.8 * eff;
+Q.unaffiliated_left += 0.8 * eff;
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.2);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.2);
+Q.left_campaign_bonus += 0.3 * eff;
+!}
+
+The party talks about labor-market discrimination, childcare, reproductive autonomy, and the everyday costs of a conservative state.
+
+- @post_event: Continue.
+
+@campaign_rural_west
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+const eff = 1 - Q.dissent;
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.rural_west_left += 2.4 * eff;
+Q.urban_working_class_left += 0.5 * eff;
+Q.psl_relation = Math.max(-10, Q.psl_relation - 1);
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.2);
+Q.left_campaign_bonus += 0.2 * eff;
+!}
+
+The SLD works county-level networks in western Poland, where post-state-farm memory and local government still give the left a faint opening.
+
+- @post_event: Continue.
+
+@campaign_catholic_nonpracticing
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+const eff = 1 - Q.dissent;
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.catholic_nonpracticing_left += 2.5 * eff;
+Q.women_over_50_left += 0.6 * eff;
+Q.vatican_episcopate_alignment = Math.max(0, Q.vatican_episcopate_alignment - 0.2);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.2);
+Q.left_campaign_bonus += 0.25 * eff;
+!}
+
+The party separates private Catholic identity from clerical political power, trying to reach voters who no longer obey the pulpit but do not think of themselves as anti-religious.
+
+- @post_event: Continue.
+
+@fundraising
+title: Fundraising
+new-page: true
+is-card: true
+card-image: img/party_cards/fundraising.png
+tags: lewica_party_affairs
+view-if: fundraising_timer <= 0
+on-arrival: fundraising_timer = 12
+
+= Fundraising
+
+The party cannot exist without money. It receives yearly dues, but the level of dues changes both resources and internal discipline.
+
+- @fundraising_maintain: Maintain our current dues.
+- @fundraising_reduce: Reduce dues.
+- @fundraising_increase: Increase dues.
+
+@fundraising_maintain
+subtitle: We gain [+ dues +] resources per year.
+
+We maintain our current dues.
+
+- @post_event: Continue.
+
+@fundraising_reduce
+subtitle: We will gain [+ dues - 1 +] resources per year. -1 resource.
+choose-if: dues > 1 and resources >= 1
+unavailable-subtitle: We lack resources, or dues are already at their floor.
+on-arrival: {!
+Q.dues -= 1;
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.8);
+Q.sld_modernizers_dissent = Math.max(0, Q.sld_modernizers_dissent - 0.8);
+Q.tr_residue_dissent = Math.max(0, Q.tr_residue_dissent - 0.8);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.8);
+if (Q.dissent_percent < 5) Q.resources += 1;
+if (Q.dissent_percent > 30) Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.month_actions += 1;
+!}
+
+Members appreciate the relief, especially in weaker local branches, but the annual income stream shrinks.
+
+- @post_event: Continue.
+
+@fundraising_increase
+subtitle: We will gain [+ dues + 1 +] resources per year. +1 resource.
+view-if: dues <= 4
+on-arrival: {!
+Q.dues += 1;
+Q.resources += 1;
+Q.party_resources = Q.resources;
+Q.urban_working_class_left -= 0.8;
+Q.age_65_plus_left -= 0.4;
+if (Q.unemployment >= 10) {
+    Q.urban_working_class_left -= 1.2;
+    Q.under_30_left -= 0.6;
+}
+if (Q.dues >= 5) {
+    Q.urban_working_class_left -= Q.dues * 0.3;
+    Q.under_30_left -= Q.dues * 0.2;
+}
+Q.month_actions += 1;
+!}
+
+The apparatus gains money now and income later, but members with thinner wallets feel the extra burden.
+
+- @post_event: Continue.
+
+@ideology
+title: Questions of Ideology
+new-page: true
+is-card: true
+card-image: img/party_cards/ideology.png
+tags: lewica_party_affairs
+view-if: ideology_timer <= 0
+on-arrival: month_actions += 1; old_ideology = ideology; ideology_timer = 18
+max-visits: 3
+
+= Questions of Ideology
+
+The SLD is torn between survival, programmatic left politics, and cultural modernization. What should guide the party for now?
+
+[? if ideology != 0: We previously chose a [+ ideology +] line. Changing it will unsettle factions. ?]
+
+- @ideology_apparatus: Institutional social democracy and coalition survival.
+- @ideology_labor: Labor, wages, pensions, and union-linked economics.
+- @ideology_modernizing: Modernizing urban progressivism.
+- @ideology_anticlerical: Explicit secular and anti-clerical politics.
+- @ideology_left_unity: Broad left unity, even at the cost of SLD control.
+
+@ideology_apparatus
+on-arrival: {!
+if (Q.ideology && Q.ideology != "institutional") Q.ideology_changed = 1;
+Q.ideology = "institutional";
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.8);
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.8);
+Q.sld_modernizers_dissent = Math.min(10, Q.sld_modernizers_dissent + 0.4);
+Q.ko_relation += 2;
+Q.psl_relation += 1;
+!}
+go-to: ideology_changed if ideology_changed = 1
+
+The party chooses discipline, parliamentary seriousness, and coalition viability over ideological sharpness.
+
+- @post_event: Continue.
+
+@ideology_labor
+on-arrival: {!
+if (Q.ideology && Q.ideology != "labor") Q.ideology_changed = 1;
+Q.ideology = "labor";
+Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.8);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.5);
+Q.urban_working_class_left += 1.0 * (1 - Q.dissent);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.3);
+Q.razem_relation += 2;
+!}
+go-to: ideology_changed if ideology_changed = 1
+
+The party talks less about nostalgia and more about wages, contracts, public services, and insecure work.
+
+- @post_event: Continue.
+
+@ideology_modernizing
+on-arrival: {!
+if (Q.ideology && Q.ideology != "modernizing") Q.ideology_changed = 1;
+Q.ideology = "modernizing";
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.8);
+Q.sld_modernizers_dissent = Math.max(0, Q.sld_modernizers_dissent - 0.6);
+Q.urban_professionals_left += 1.0 * (1 - Q.dissent);
+Q.under_30_left += 0.8 * (1 - Q.dissent);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.4);
+Q.ko_relation += 1;
+!}
+go-to: ideology_changed if ideology_changed = 1
+
+The SLD tries to look less like a post-communist inheritance machine and more like a contemporary European left party.
+
+- @post_event: Continue.
+
+@ideology_anticlerical
+on-arrival: {!
+if (Q.ideology && Q.ideology != "secular") Q.ideology_changed = 1;
+Q.ideology = "secular";
+Q.secularization_tide = Math.min(10, Q.secularization_tide + 0.4);
+Q.unaffiliated_left += 1.0 * (1 - Q.dissent);
+Q.lgbtq_left += 0.8 * (1 - Q.dissent);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.4);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.5);
+Q.vatican_episcopate_alignment = Math.max(0, Q.vatican_episcopate_alignment - 0.5);
+!}
+go-to: ideology_changed if ideology_changed = 1
+
+The party puts church-state separation at the center of its identity. It clarifies the brand, but narrows some coalition paths.
+
+- @post_event: Continue.
+
+@ideology_left_unity
+on-arrival: {!
+if (Q.ideology && Q.ideology != "left unity") Q.ideology_changed = 1;
+Q.ideology = "left unity";
+Q.tr_residue_dissent = Math.max(0, Q.tr_residue_dissent - 0.5);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.4);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.5);
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.4);
+Q.razem_relation += 2;
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+go-to: ideology_changed if ideology_changed = 1
+
+The party prepares itself to bargain with non-SLD left actors. This is promising, but it weakens apparatus control.
+
+- @post_event: Continue.
+
+@ideology_changed
+on-arrival: {!
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.5);
+Q.sld_modernizers_dissent = Math.min(10, Q.sld_modernizers_dissent + 0.5);
+Q.tr_residue_dissent = Math.min(10, Q.tr_residue_dissent + 0.5);
+Q.pps_up_dissent = Math.min(10, Q.pps_up_dissent + 0.5);
+Q.ideology_changed = 0;
+!}
+
+Changing ideological direction makes many in the party feel unmoored.
+
+- @post_event: Continue.
+
+@opponents
+title: Choosing Our Opponents
+new-page: true
+is-card: true
+card-image: img/party_cards/opponents.png
+tags: lewica_party_affairs
+view-if: year <= 2015 and opponents_timer <= 0
+on-arrival: month_actions += 1; opponents_timer = 18
+max-visits: 3
+
+= Choosing Our Opponents
+
+In media and campaign material, who should be treated as the primary opponent?
+
+[? if opponents != 0: Previously, we aimed primarily at [+ opponents +]. ?]
+
+- @opponent_pis: PiS and the conservative state project.
+- @opponent_ko: PO and the liberal establishment.
+- @opponent_church: Clerical political power.
+- @opponent_farright: Far-right nationalism.
+- @opponent_all: The entire anti-left political order.
+
+@opponent_pis
+on-arrival: {!
+Q.opponents = "PiS";
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.4);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.3);
+Q.ko_relation += 2;
+Q.pis_relation -= 3;
+Q.pis_kaczynski_strength = Math.min(10, Q.pis_kaczynski_strength + 0.2);
+Q.catholic_nonpracticing_pis -= 0.8;
+Q.urban_working_class_pis -= 0.6;
+!}
+
+The message is legible to anti-PiS voters and coalition-minded elites, but it risks making the SLD look like PO's smaller assistant.
+
+- @post_event: Continue.
+
+@opponent_ko
+on-arrival: {!
+Q.opponents = "PO liberal establishment";
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.4);
+Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.4);
+Q.tr_residue_strength = Math.min(10, Q.tr_residue_strength + 0.3);
+Q.ko_relation -= 4;
+Q.razem_relation += 2;
+Q.urban_professionals_ko -= 0.5;
+Q.urban_working_class_ko -= 0.8;
+Q.urban_working_class_left += 0.7 * (1 - Q.dissent);
+!}
+
+The party attacks privatization, broken public services, and complacent liberalism. It distinguishes the left, but damages coalition trust.
+
+- @post_event: Continue.
+
+@opponent_church
+on-arrival: {!
+Q.opponents = "clerical political power";
+Q.secularization_tide = Math.min(10, Q.secularization_tide + 0.3);
+Q.vatican_episcopate_alignment = Math.max(0, Q.vatican_episcopate_alignment - 0.5);
+Q.unaffiliated_left += 1.0 * (1 - Q.dissent);
+Q.lgbtq_left += 0.8 * (1 - Q.dissent);
+Q.catholic_practicing_left -= 0.4;
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.4);
+!}
+
+The SLD revives one of its clearest issues: a secular state. It mobilizes secular voters while hardening religious opposition.
+
+- @post_event: Continue.
+
+@opponent_farright
+on-arrival: {!
+Q.opponents = "far-right nationalism";
+Q.mw_onr_mobilization = Math.max(0, Q.mw_onr_mobilization - 0.3);
+Q.konf_poll = Math.max(0, Q.konf_poll - 0.2);
+Q.konf_mentzen_strength = Math.max(0, Q.konf_mentzen_strength - 0.1);
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.2);
+Q.sld_modernizers_dissent = Math.max(0, Q.sld_modernizers_dissent - 0.2);
+Q.under_30_konf -= 0.5;
+!}
+
+The party treats organized nationalism as a public threat rather than as eccentric youth politics.
+
+- @post_event: Continue.
+
+@opponent_all
+on-arrival: {!
+Q.opponents = "the entire anti-left order";
+Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.5);
+Q.tr_residue_strength = Math.min(10, Q.tr_residue_strength + 0.3);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.7);
+Q.ko_relation -= 2;
+Q.psl_relation -= 2;
+Q.razem_relation += 1;
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+The rhetoric is sharp, but it can make every future negotiation harder.
+
+- @post_event: Continue.
+
+@inter_party_relationships
+title: Inter-Party Relationships
+new-page: true
+is-card: true
+card-image: img/party_cards/inter_party_relationships.png
+tags: lewica_party_affairs
+view-if: inter_party_relationships_timer <= 0
+on-arrival: month_actions += 1; inter_party_relationships_timer = 6
+
+= Inter-Party Relationships
+
+SLD cannot rebuild the left alone. Which relationship should the party invest in?
+
+- @relation_ko: Improve working relations with PO/KO circles.
+- @relation_psl: Keep channels open with PSL.
+- @relation_tw: Work with Twój Ruch, Greens, and liberal-left remnants.
+- @relation_razem: Open channels to the emerging new left.
+- @relation_alone: Stand alone for now.
+
+@relation_ko
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.ko_relation += 5 * (1 - Q.dissent);
+Q.ko_trzaskowski_strength = Math.min(10, Q.ko_trzaskowski_strength + 0.2);
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.2);
+Q.tr_residue_dissent = Math.min(10, Q.tr_residue_dissent + 0.2);
+!}
+
+The practical case for anti-PiS cooperation is obvious, even before PiS returns to power.
+
+- @post_event: Continue.
+
+@relation_psl
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.psl_relation += 5 * (1 - Q.dissent);
+Q.rural_west_left += 0.6 * (1 - Q.dissent);
+Q.catholic_nonpracticing_left += 0.4 * (1 - Q.dissent);
+Q.sld_modernizers_dissent = Math.min(10, Q.sld_modernizers_dissent + 0.2);
+!}
+
+The PSL channel is unglamorous but useful: local government, rural credibility, and future coalition arithmetic.
+
+- @post_event: Continue.
+
+@relation_tw
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.tr_residue_dissent = Math.max(0, Q.tr_residue_dissent - 0.5);
+Q.tr_residue_strength = Math.min(10, Q.tr_residue_strength + 0.3);
+Q.unaffiliated_left += 0.7 * (1 - Q.dissent);
+Q.lgbtq_left += 0.7 * (1 - Q.dissent);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.2);
+!}
+
+The Palikot wave is already fading, but its secular-liberal voters and activists still matter.
+
+- @post_event: Continue.
+
+@relation_razem
+subtitle: -1 resources
+view-if: year >= 2015
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.razem_relation += 5 * (1 - Q.dissent);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.3);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.4);
+Q.under_30_left += 0.6 * (1 - Q.dissent);
+!}
+
+The new left is suspicious of the SLD's inheritance, but early contact may prevent a complete split of the anti-PO left electorate.
+
+- @post_event: Continue.
+
+@relation_alone
+
+The party avoids new entanglements this month.
+
+- @post_event: Continue.
+
+@international_relations
+title: International Relations
+new-page: true
+is-card: true
+card-image: img/party_cards/international_relations.png
+tags: lewica_party_affairs
+view-if: international_relations_timer <= 0
+on-arrival: month_actions += 1; international_relations_timer = 12
+max-visits: 4
+
+= International Relations
+
+Through European socialist networks and foreign-policy contacts, SLD can borrow credibility and ideas from abroad.
+
+- @international_snd: Build ties with S&D and European social democrats.
+- @international_germany: Work the German and Brussels channels.
+- @international_ukraine: Develop a clearer Ukraine and eastern policy.
+- @international_atlantic: Maintain NATO and US-security credibility.
+- @international_none: We do not need international contacts now.
+
+@international_snd
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.4);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.3);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+European social democrats give the party some vocabulary for renewal beyond post-communist defensiveness.
+
+- @post_event: Continue.
+
+@international_germany
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.german_bilateral = Math.min(10, Q.german_bilateral + 0.3);
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.2);
+Q.ko_relation += 1;
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.1);
+!}
+
+The SLD leans on predictable European channels: useful for seriousness, not useful for insurgent energy.
+
+- @post_event: Continue.
+
+@international_ukraine
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.ukrainian_alignment = Math.min(10, Q.ukrainian_alignment + 0.4);
+Q.russian_threat_level = Math.max(Q.russian_threat_level, 5);
+Q.belarusian_eastern_minority_left += 1.0 * (1 - Q.dissent);
+Q.pps_up_dissent = Math.min(10, Q.pps_up_dissent + 0.2);
+!}
+
+After Maidan and Crimea, eastern policy is no longer a specialist issue. The party starts catching up.
+
+- @post_event: Continue.
+
+@international_atlantic
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.us_alignment = Math.min(10, Q.us_alignment + 0.3);
+Q.ko_relation += 1;
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.2);
+Q.tr_residue_dissent = Math.min(10, Q.tr_residue_dissent + 0.2);
+!}
+
+The SLD keeps the old NATO-accession-era line: pro-Western, predictable, and security-minded.
+
+- @post_event: Continue.
+
+@international_none
+
+The party stays focused on domestic survival.
+
+- @post_event: Continue.
+
+@party_organizations
+title: Party Organizations
+new-page: true
+is-card: true
+card-image: img/party_cards/party_organizations.png
+tags: lewica_party_affairs
+view-if: party_organizations_timer <= 0
+on-arrival: month_actions += 1; party_organizations_timer = 6
+max-visits: 6
+
+= Party Organizations
+
+The party is more than a Sejm club. It needs local structures, publications, youth work, and social links.
+
+- @org_media: Fund party media and journalists.
+- @org_welfare: Fund legal aid and social-support work.
+- @org_culture: Fund conferences, clubs, and political education.
+- @org_unions: Invest in union linkage.
+- @org_youth: Support young activists.
+- @org_regional: Rebuild regional structures.
+- @org_nothing: Do not increase funding.
+
+@org_media
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 1; party_resources = resources; media_timer = 0
+go-to: media
+
+@org_welfare
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.4);
+Q.urban_working_class_left += 1.0 * (1 - Q.dissent);
+Q.women_over_50_left += 0.5 * (1 - Q.dissent);
+!}
+
+The SLD backs legal aid and social support around evictions, labor disputes, and local welfare offices.
+
+- @post_event: Continue.
+
+@org_culture
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.4);
+Q.sld_modernizers_dissent = Math.max(0, Q.sld_modernizers_dissent - 0.4);
+Q.tr_residue_dissent = Math.max(0, Q.tr_residue_dissent - 0.4);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.4);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.2);
+!}
+
+Political education and cultural work make members feel part of something larger than electoral arithmetic.
+
+- @post_event: Continue.
+
+@org_unions
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.ip_union_strength = Math.min(10, Q.ip_union_strength + 0.3);
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.3);
+Q.urban_working_class_left += 1.1 * (1 - Q.dissent);
+Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.3);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.3);
+!}
+
+The party tries to reconnect with labor without pretending that old union ties are enough by themselves.
+
+- @post_event: Continue.
+
+@org_youth
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.under_30_left += 1.3 * (1 - Q.dissent);
+Q.unaffiliated_left += 0.7 * (1 - Q.dissent);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.4);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.3);
+!}
+
+New activists bring energy, but not all of them are interested in deference to the old party hierarchy.
+
+- @post_event: Continue.
+
+@org_regional
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.left_regional_rebuild += 1;
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.4);
+Q.sld_apparatus_strength = Math.min(10, Q.sld_apparatus_strength + 0.4);
+Q.rural_west_left += 0.9 * (1 - Q.dissent);
+Q.urban_working_class_left += 0.7 * (1 - Q.dissent);
+Q.left_campaign_bonus += 0.2 * (1 - Q.dissent);
+!}
+
+Councillors, district offices, and people who can still fill a room are the SLD's most concrete assets.
+
+- @post_event: Continue.
+
+@org_nothing
+
+The party avoids new organizational spending.
+
+- @post_event: Continue.
+
+@media
+title: Media
+new-page: true
+is-card: true
+card-image: img/party_cards/media.png
+tags: lewica_party_affairs
+view-if: media_timer <= 0
+on-arrival: month_actions += 1; media_timer = 6
+
+= Media
+
+The SLD has old press habits, television veterans, and a weak online presence. What should the media operation do?
+
+- @media_commercial: Broaden appeal through television-friendly messaging.
+- @media_campaign: Focus media on electing left deputies.
+- @media_ideological: Open space for internal ideological debate.
+- @media_digital: Build digital channels.
+- @post_event: Do nothing with media at the moment.
+
+@media_commercial
+on-arrival: {!
+Q.resources += 1;
+Q.party_resources = Q.resources;
+Q.media_reach = Math.min(10, Q.media_reach + 0.4);
+Q.urban_professionals_left += 0.8 * (1 - Q.dissent);
+Q.catholic_nonpracticing_left += 0.5 * (1 - Q.dissent);
+Q.tr_residue_dissent = Math.min(10, Q.tr_residue_dissent + 0.5);
+Q.pps_up_dissent = Math.min(10, Q.pps_up_dissent + 0.3);
+!}
+
+The party sounds more accessible and raises money, but activists dislike the flattening of the message.
+
+- @post_event: Continue.
+
+@media_campaign
+on-arrival: {!
+Q.media_reach = Math.min(10, Q.media_reach + 0.3);
+Q.urban_working_class_left += 0.9 * (1 - Q.dissent);
+Q.age_50_65_left += 0.7 * (1 - Q.dissent);
+Q.left_campaign_bonus += 0.2 * (1 - Q.dissent);
+!}
+
+The media line is simple: save the left in parliament.
+
+- @post_event: Continue.
+
+@media_ideological
+on-arrival: {!
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.5);
+Q.sld_modernizers_dissent = Math.max(0, Q.sld_modernizers_dissent - 0.5);
+Q.tr_residue_dissent = Math.max(0, Q.tr_residue_dissent - 0.5);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.5);
+Q.left_brand_strength = Math.min(10, Q.left_brand_strength + 0.1);
+!}
+
+The party papers and friendly outlets let factions argue in public without immediately breaking the organization.
+
+- @post_event: Continue.
+
+@media_digital
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.media_reach = Math.min(10, Q.media_reach + 0.8);
+Q.under_30_left += 1.0 * (1 - Q.dissent);
+Q.unaffiliated_left += 0.7 * (1 - Q.dissent);
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.3);
+!}
+
+Online work cannot repair the whole brand, but it starts reaching voters the SLD usually misses.
+
+- @post_event: Continue.
+
+@rally
+title: Political Rally
+new-page: true
+is-card: true
+card-image: img/party_cards/political_rally.png
+tags: lewica_party_affairs
+view-if: rally_timer <= 0
+on-arrival: month_actions += 1; rally_timer = 6; rally_timer = 2 if (year = 2015 and month >= 8)
+
+= Political Rally
+
+Mass rallies and conventions still matter, especially near an election. What is the theme?
+
+- @rally_class: Wages, labor, and public services.
+- @rally_secular: A secular state.
+- @rally_democracy: Defending democracy against PiS.
+- @rally_europe: European social democracy.
+- @rally_local: A mixture of local concerns.
+
+@rally_class
+on-arrival: {!
+Q.urban_working_class_left += 1.6 * (1 - Q.dissent);
+Q.under_30_left += 0.5 * (1 - Q.dissent);
+Q.pps_up_strength = Math.min(10, Q.pps_up_strength + 0.3);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.3);
+Q.ko_relation -= 1;
+!}
+
+The rally makes the party sound materially left again.
+
+- @post_event: Continue.
+
+@rally_secular
+on-arrival: {!
+Q.secularization_tide = Math.min(10, Q.secularization_tide + 0.3);
+Q.unaffiliated_left += 1.3 * (1 - Q.dissent);
+Q.lgbtq_left += 1.0 * (1 - Q.dissent);
+Q.catholic_practicing_left -= 0.3;
+Q.vatican_episcopate_alignment = Math.max(0, Q.vatican_episcopate_alignment - 0.3);
+!}
+
+The party gives secular voters something unmistakable to vote for.
+
+- @post_event: Continue.
+
+@rally_democracy
+on-arrival: {!
+Q.constitutional_crisis_risk = Math.max(0, Q.constitutional_crisis_risk - 0.1);
+Q.ko_relation += 1;
+Q.urban_professionals_left += 0.8 * (1 - Q.dissent);
+Q.catholic_nonpracticing_left += 0.5 * (1 - Q.dissent);
+Q.pis_relation -= 1;
+!}
+
+The rally puts the SLD inside the anti-PiS democratic camp.
+
+- @post_event: Continue.
+
+@rally_europe
+on-arrival: {!
+Q.eu_institutional_alignment = Math.min(10, Q.eu_institutional_alignment + 0.2);
+Q.urban_professionals_left += 0.9 * (1 - Q.dissent);
+Q.under_30_left += 0.5 * (1 - Q.dissent);
+Q.ko_relation += 1;
+Q.sld_modernizers_strength = Math.min(10, Q.sld_modernizers_strength + 0.2);
+!}
+
+The SLD wraps itself in Europe and social-democratic normalcy.
+
+- @post_event: Continue.
+
+@rally_local
+on-arrival: {!
+Q.urban_working_class_left += 1.0 * (1 - Q.dissent);
+Q.rural_west_left += 0.8 * (1 - Q.dissent);
+Q.age_65_plus_left += 0.5 * (1 - Q.dissent);
+Q.left_regional_rebuild += 0.2;
+Q.left_campaign_bonus += 0.15 * (1 - Q.dissent);
+!}
+
+The speakers follow the mood of local audiences: hospitals, buses, rents, jobs, pensions.
+
+- @post_event: Continue.
+
+@civil_society
+title: Civil Society Linkage
+new-page: true
+is-card: true
+card-image: img/party_cards/civil_society.png
+tags: lewica_party_affairs
+view-if: civil_society_timer <= 0
+on-arrival: month_actions += 1; civil_society_timer = 6
+max-visits: 6
+
+= Civil Society Linkage
+
+In this setting, the old paramilitary slot becomes organized civil society: unions, women's groups, watchdogs, and anti-far-right networks.
+
+- @civil_unions: Work through union networks.
+- @civil_women: Support women's organizations.
+- @civil_watchdogs: Support democratic watchdogs.
+- @civil_antifascist: Support anti-far-right monitoring.
+- @civil_nothing: Keep the linkage informal.
+
+@civil_unions
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.5);
+Q.ip_union_strength = Math.min(10, Q.ip_union_strength + 0.4);
+Q.urban_working_class_left += 1.0 * (1 - Q.dissent);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.3);
+!}
+
+The SLD stops treating unions as ceremonial partners and starts using them as live political infrastructure.
+
+- @post_event: Continue.
+
+@civil_women
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.5);
+Q.women_under_50_left += 1.1 * (1 - Q.dissent);
+Q.unaffiliated_left += 0.6 * (1 - Q.dissent);
+Q.secularization_tide = Math.min(10, Q.secularization_tide + 0.2);
+Q.sld_apparatus_dissent = Math.min(10, Q.sld_apparatus_dissent + 0.2);
+!}
+
+The pre-Black-Protest infrastructure is still scattered, but the SLD can begin building trust.
+
+- @post_event: Continue.
+
+@civil_watchdogs
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.4);
+Q.ko_relation += 1;
+Q.constitutional_crisis_risk = Math.max(0, Q.constitutional_crisis_risk - 0.1);
+Q.urban_professionals_left += 0.6 * (1 - Q.dissent);
+!}
+
+Rule-of-law NGOs are not SLD terrain, but relationships here will matter if PiS wins.
+
+- @post_event: Continue.
+
+@civil_antifascist
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: {!
+Q.resources -= 1;
+Q.party_resources = Q.resources;
+Q.civil_society_capital = Math.min(10, Q.civil_society_capital + 0.3);
+Q.mw_onr_mobilization = Math.max(0, Q.mw_onr_mobilization - 0.4);
+Q.under_30_konf -= 0.4;
+Q.under_30_left += 0.5 * (1 - Q.dissent);
+!}
+
+The party supports monitoring and counter-messaging against nationalist street groups without turning the game into streetfighting.
+
+- @post_event: Continue.
+
+@civil_nothing
+
+Civil society contacts remain informal.
+
+- @post_event: Continue.
+
+@party_disunity
+title: Party Disunity
+new-page: true
+is-card: true
+card-image: img/party_cards/party_disunity.png
+tags: lewica_party_affairs
+view-if: party_disunity_timer <= 0 and (left_dissent >= 4 or sld_apparatus_dissent >= 7 or sld_modernizers_dissent >= 7 or gawkowski_network_dissent >= 7 or tr_residue_dissent >= 7 or pps_up_dissent >= 7)
+on-arrival: month_actions += 1; party_disunity_timer = 4
+frequency: 200
+
+= Party Disunity
+
+The party is being pulled apart by factional dissatisfaction. Something must be done to keep the SLD functional.
+
+[? if sld_apparatus_dissent >= 7: The apparatus is angry. ?]
+[? if sld_modernizers_dissent >= 7: The modernizers are angry. ?]
+[? if gawkowski_network_dissent >= 7: Gawkowski's secretariat network is angry. ?]
+[? if tr_residue_dissent >= 7: The Twój Ruch residue is angry. ?]
+[? if pps_up_dissent >= 7: The socialist junior partners are angry. ?]
+
+- @disunity_enforce: Enforce party discipline.
+- @disunity_apparatus: Give concessions to the apparatus.
+- @disunity_modernizers: Give concessions to the modernizers.
+- @disunity_gawkowski: Give procedural room to Gawkowski's network.
+- @disunity_tr: Give concessions to Twój Ruch liberals.
+- @disunity_pps: Give concessions to PPS/UP socialists.
+- @disunity_do_nothing: Let the factions argue.
+
+@disunity_enforce
+on-arrival: {!
+Q.sld_apparatus_dissent = Math.max(0, Q.sld_apparatus_dissent - 0.8);
+Q.sld_modernizers_dissent = Math.max(0, Q.sld_modernizers_dissent - 0.8);
+Q.gawkowski_network_dissent = Math.max(0, Q.gawkowski_network_dissent - 0.8);
+Q.tr_residue_dissent = Math.max(0, Q.tr_residue_dissent - 0.8);
+Q.pps_up_dissent = Math.max(0, Q.pps_up_dissent - 0.8);
+Q.urban_working_class_left -= Q.dissent * 1.0;
+Q.urban_professionals_left -= Q.dissent * 0.8;
+Q.under_30_left -= Q.dissent * 0.8;
+!}
+
+Discipline reduces dissent, but it can look like the old machine crushing debate.
+
+- @post_event: Continue.
+
+@disunity_apparatus
+view-if: sld_apparatus_dissent >= 7
+on-arrival: sld_apparatus_dissent -= 1.5; sld_modernizers_dissent += 0.8; tr_residue_dissent += 0.6
+
+The leadership promises more control to regional structures and veteran organizers.
+
+- @post_event: Continue.
+
+@disunity_modernizers
+view-if: sld_modernizers_dissent >= 7
+on-arrival: sld_modernizers_dissent -= 1.5; sld_apparatus_dissent += 0.8; gawkowski_network_strength += 0.2
+
+The party promises a more contemporary message and gives modernizers more public space.
+
+- @post_event: Continue.
+
+@disunity_gawkowski
+view-if: gawkowski_network_dissent >= 7
+on-arrival: gawkowski_network_dissent -= 1.5; gawkowski_network_strength += 0.3; sld_apparatus_dissent += 0.5; sld_modernizers_dissent -= 0.3
+
+The leadership gives the secretary general more procedural control over branches, candidate lists, and internal consultation.
+
+- @post_event: Continue.
+
+@disunity_tr
+view-if: tr_residue_dissent >= 7
+on-arrival: tr_residue_dissent -= 1.5; sld_apparatus_dissent += 0.5; pps_up_dissent += 0.4
+
+The party gives secular-liberal allies more room.
+
+- @post_event: Continue.
+
+@disunity_pps
+view-if: pps_up_dissent >= 7
+on-arrival: pps_up_dissent -= 1.5; sld_modernizers_dissent += 0.5
+
+The party makes programmatic concessions to the old socialist partners.
+
+- @post_event: Continue.
+
+@disunity_do_nothing
+on-arrival: sld_apparatus_dissent += 0.2; sld_modernizers_dissent += 0.2; gawkowski_network_dissent += 0.2; tr_residue_dissent += 0.2; pps_up_dissent += 0.2
+
+Perhaps dissent is healthy. Perhaps it is just drift.
+
+- @post_event: Continue.
